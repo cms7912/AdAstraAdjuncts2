@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AudienceGuestbookEntry" representedClassName="AudienceGuestbookEntry" syncable="YES">
+        <attribute name="appInstallID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="cloudKitUser_PersonNameComponents_Store" optional="YES" attributeType="Transformable"/>
+        <attribute name="cloudKitUserID" optional="YES" attributeType="String"/>
+        <attribute name="createdTimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="deviceName" optional="YES" attributeType="String"/>
+        <attribute name="firstAccessTimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="mostRecentAccessTimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="mostRecentCaleoAppVerion" optional="YES" attributeType="String"/>
+        <attribute name="mostRecentDBVersion" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="AudienceMember" representedClassName="AudienceMember" syncable="YES">
+        <attribute name="appInstallID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="createdTimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lastObservationTimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <elements>
+        <element name="AudienceGuestbookEntry" positionX="-516.2586669921875" positionY="-392.5908966064453" width="128" height="164"/>
+        <element name="AudienceMember" positionX="-372.3800048828125" positionY="-394.7790985107422" width="128" height="74"/>
+    </elements>
+</model>

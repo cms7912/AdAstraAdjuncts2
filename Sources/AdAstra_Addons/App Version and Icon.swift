@@ -39,14 +39,26 @@ public func WarnWheniOS14IsDropped() {}
 
 
 extension Bundle {
-	var iconFileName: String {
-		guard let icons = infoDictionary?["CFBundleIcons"] as? [String: Any],
-					let primaryIcon = icons["CFBundlePrimaryIcon"] as? [String: Any],
-					let iconFiles = primaryIcon["CFBundleIconFiles"] as? [String],
-					let iconFileName = iconFiles.last
-		else { return "" }
-		return iconFileName ?? ""
-	}
+    var iconFileName: String {
+        guard let icons = infoDictionary?["CFBundleIcons"] as? [String: Any],
+              let primaryIcon = icons["CFBundlePrimaryIcon"] as? [String: Any],
+              let iconFiles = primaryIcon["CFBundleIconFiles"] as? [String],
+              let iconFileName = iconFiles.last
+        else { return "" }
+        return iconFileName ?? ""
+    }
+    
+    
+    var icon: UINSImage? {
+        if let icons = infoDictionary?["CFBundleIcons"] as? [String: Any],
+           let primaryIcon = icons["CFBundlePrimaryIcon"] as? [String: Any],
+           let iconFiles = primaryIcon["CFBundleIconFiles"] as? [String],
+           let lastIcon = iconFiles.last {
+            return UINSImage(named: lastIcon)
+        }
+        return nil
+    }
+    
 }
 
 public struct AppIcon: View {

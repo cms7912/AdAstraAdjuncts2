@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import AdAstraExtensions
 // import SwiftUI
 // import UIKit
 // import CoreData
@@ -78,132 +78,138 @@ public extension Logger {
     line _: Int,
     logPrefix: String? = nil
   ) {
-    // print("conditionReceived: \(condition)")
-    guard (condition && (level.isNil ||
-        (level.isNotNil && (level!.rawValue >= CurrentLogLevel.rawValue))
-    )
-    ) else { return }
-
-    var logLevelIndicator: String {
-      guard let level = level else { return "" }
-      switch level {
-        case .error:
-          return "⚠️"
-        case .fault:
-          return "🛑"
-        default:
-          return ""
-      }
-    }
-
-    var timestamp: String = ""
-    if #available(iOS 15, macCatalyst 15, macOS 12, *) {
-      timestamp = String(Date.now.formatted(date: .omitted, time: .standard).dropLast(3))
-    }
-
-    // extract the thread:
-    var thread: String = String(cString: __dispatch_queue_get_label(nil), encoding: .utf8) ?? ""
-    #if DEBUG
-    switch thread {
-      case "com.apple.main-thread":
-      thread = "main-thread"
-      case "com.apple.root.user-interactive-qos":
-      thread = "user-int-thread"
-      default:
-
-      // entirely remove any "NSManagedObjectContext 0x600002059d40"
-      // most contexts have their own names)
-      thread = thread.replacingOccurrences(
-        of: "^NSManagedObjectContext ([0-9xabcdef]){14}",
-        with: "",
-        options: .regularExpression
-      )
-      // _ = 1
-    }
-    #endif
-    // https://stackoverflow.com/questions/39553171/how-to-get-the-current-queue-name-in-swift-3
-
-    // Extract the filename from the full path
-    var filename = ExtractFilename(from: filepath)
-    let prefix = logPrefix ?? ""
-
-    // Extract the method name without the parameter list
-    var methodName: String = ExtractMethodName(from: function)
-
-    func getObjectAsString(_ object: Any?) -> String {
-      var output: String = ""
-
-      if object != nil {
-        let mirror = Mirror(reflecting: object!)
-        for (property, value) in mirror.children {
-          guard let property = property else { continue }
-
-          if ["id", "name"].contains(property) {
-            output += "\(property):\(value); "
+      // print("conditionReceived: \(condition)")
+      guard (condition && (level.isNil ||
+                           (level.isNotNil && (level!.rawValue >= CurrentLogLevel.rawValue))
+                          )
+      ) else { return }
+      
+      var logLevelIndicator: String {
+          guard let level = level else { return "" }
+          switch level {
+          case .error:
+              return "⚠️"
+          case .fault:
+              return "🛑"
+          default:
+              return ""
           }
-        }
       }
-
-      output += String(describing: object)
-
-      return output
-    }
-
-    func messageAsString(_ myMessage: Any?) -> String {
-      if myMessage != nil {
-        if let int = myMessage as? Int {
-          return String(int)
-        }
-        if let string = myMessage as? String {
-          return string
-        }
-        if let array = myMessage as? [Any?] {
-          let stringArray: [String] = array.map {messageAsString($0)}
-          //                    return stringArray.reduce("", { $0 == "" ? $1 : $0 + "," + $1 })
-          return stringArray.reduce("") { $0 + "," + $1 }
-        }
-        return getObjectAsString(myMessage)
+      
+      var timestamp: String = ""
+      if #available(iOS 15, macCatalyst 15, macOS 12, *) {
+          timestamp = String(Date.now.formatted(date: .omitted, time: .standard).dropLast(3))
       }
-      return "" // 'nil'"
-    }
-
-    let fullMessage = messageAsString(message)
-
-    var fullLogString: String = "\(timestamp) \(thread)|\(filename)|\(prefix)\(methodName)"
-    // when 'message' is nil then simply show file name and method name
-    if message != nil {
-      //            fullLogString += ":L\(line): \(fullMessage)"
-      fullLogString += ": \(fullMessage)"
-    }
-         // return fullLogString
-
-         // self.appLogger.log(level: level, "\(fullLogString)")
-
-    // self.appLogger.log("\(fullLogString)")
-    #if Release
-    switch level {
-      case .fault:
-      appLogger.fault("\(fullLogString)")
-      case .debug:
-      appLogger.debug("\(fullLogString)")
-      case .error:
-      appLogger.error("\(fullLogString)")
-      case .info:
-      appLogger.info("\(fullLogString)")
+      
+      // extract the thread:
+      var thread: String = String(cString: __dispatch_queue_get_label(nil), encoding: .utf8) ?? ""
+#if DEBUG
+      switch thread {
+      case "com.apple.main-thread":
+          thread = "main-thread"
+      case "com.apple.root.user-interactive-qos":
+          thread = "user-int-thread"
       default:
-      appLogger.log("\(fullLogString)")
-    }
-    #else
-    print(fullLogString)
-
-    LoggerStore.shared.storeMessage(
-      label: "auth",
-      level: .debug,
-      message: fullLogString // "Will login user",
-      // metadata: ["userId": .string("uid-1")]
-    )
-
-    #endif
+          
+          // entirely remove any "NSManagedObjectContext 0x600002059d40"
+          // most contexts have their own names)
+          thread = thread.replacingOccurrences(
+            of: "^NSManagedObjectContext ([0-9xabcdef]){14}",
+            with: "",
+            options: .regularExpression
+          )
+          // _ = 1
+      }
+#endif
+      // https://stackoverflow.com/questions/39553171/how-to-get-the-current-queue-name-in-swift-3
+      
+      // Extract the filename from the full path
+      var filename = ExtractFilename(from: filepath)
+      let prefix = logPrefix ?? ""
+      
+      // Extract the method name without the parameter list
+      var methodName: String = ExtractMethodName(from: function)
+      
+      func getObjectAsString(_ object: Any?) -> String {
+          var output: String = ""
+          
+          if object != nil {
+              let mirror = Mirror(reflecting: object!)
+              for (property, value) in mirror.children {
+                  guard let property = property else { continue }
+                  
+                  if ["id", "name"].contains(property) {
+                      output += "\(property):\(value); "
+                  }
+              }
+          }
+          
+          output += String(describing: object)
+          
+          return output
+      }
+      
+      func messageAsString(_ myMessage: Any?) -> String {
+          if myMessage != nil {
+              if let int = myMessage as? Int {
+                  return String(int)
+              }
+              if let string = myMessage as? String {
+                  return string
+              }
+              if let array = myMessage as? [Any?] {
+                  let stringArray: [String] = array.map {messageAsString($0)}
+                  //                    return stringArray.reduce("", { $0 == "" ? $1 : $0 + "," + $1 })
+                  return stringArray.reduce("") { $0 + "," + $1 }
+              }
+              return getObjectAsString(myMessage)
+          }
+          return "" // 'nil'"
+      }
+      
+      let fullMessage = messageAsString(message)
+      
+      var fullLogString: String = "\(timestamp) \(thread)|\(filename)|\(prefix)\(methodName)"
+      // when 'message' is nil then simply show file name and method name
+      if message != nil {
+          //            fullLogString += ":L\(line): \(fullMessage)"
+          fullLogString += ": \(fullMessage)"
+      }
+      // return fullLogString
+      
+      // self.appLogger.log(level: level, "\(fullLogString)")
+      
+      // self.appLogger.log("\(fullLogString)")
+#if Release
+      switch level {
+      case .fault:
+          appLogger.fault("\(fullLogString)")
+      case .debug:
+          appLogger.debug("\(fullLogString)")
+      case .error:
+          appLogger.error("\(fullLogString)")
+      case .info:
+          appLogger.info("\(fullLogString)")
+      default:
+          appLogger.log("\(fullLogString)")
+      }
+#else
+      print(fullLogString)
+      
+      
+      
+#if Disabled
+      LoggerStore.shared.storeMessage(
+        label: "auth",
+        level: .debug,
+        message: fullLogString // "Will login user",
+        // metadata: ["userId": .string("uid-1")]
+      )
+#endif
+      
+      
+      
+#endif
   }
 
   static var subsystemName: String { Bundle.main.bundleIdentifier ?? "AdAstraAppLoggerDefault" }

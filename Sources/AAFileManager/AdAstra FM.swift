@@ -12,6 +12,7 @@ import Foundation
 // import CoreData
 // import SFSafeSymbols
 import os.log
+import AALogger
 
 public protocol AdAstraFM_ProjectSpecificProtocol {
     static var AppGroupFolderName: String { get }
@@ -34,7 +35,9 @@ public class AdAstraFM_NEW: NSObject {
                 appGroup = P.AppGroupFolderName
                 // appGroup = P.self.AppGroupFolderName
             } else {
-                CrashAfterUserAlert("No app group found.")
+//                CrashAfterUserAlert("No app group found.")
+                assertionFailure()
+                fatalError()
             }
             return appGroup
         }()

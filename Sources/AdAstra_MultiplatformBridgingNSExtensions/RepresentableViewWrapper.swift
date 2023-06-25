@@ -42,7 +42,7 @@ struct ControllerRepresentable<Content: View>: UIViewControllerRepresentable {
         ControllerRepresentableCoordinator(parentRepresentable: self)
 	}
 }
-@available(iOS 999,*)
+@available(macOS 999, iOS 999,*)
 class ControllerRepresentableCoordinator<Content: View>: NSObject {
 	var parentRepresentable: ControllerRepresentable<Content>
 	init(parentRepresentable: ControllerRepresentable<Content>) {
@@ -52,7 +52,7 @@ class ControllerRepresentableCoordinator<Content: View>: NSObject {
 
 
 
-@available(iOS 999,*)
+@available(macOS 999, iOS 999,*)
 class SwiftViewWrapper<Content: View>: UIViewController, ObservableObject {
 
 	var wrappedView: () -> Content
