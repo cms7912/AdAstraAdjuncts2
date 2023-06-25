@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:AdAstraAdjuncts2 Project/AdAstraAdjuncts2 Project.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:AdAstraExtensions Playground.playground">
+   </FileRef>
+</Workspace>
