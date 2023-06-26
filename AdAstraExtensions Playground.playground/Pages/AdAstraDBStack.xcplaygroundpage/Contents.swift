@@ -19,6 +19,6 @@ PlaygroundPage.current.liveView = views[0] as! NSView
 
 
 
-//_ = ProjectsDBStack(inTempFolderTesting: true, projectFolder: URL(fileURLWithPath: "/"))
+_ = ProjectsDBStack.shared
 
 //: [Next](@next)
