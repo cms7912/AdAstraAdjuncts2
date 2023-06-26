@@ -86,7 +86,7 @@ open class ProjectsDBStack: NSObject, ObservableObject // , ProjectsDBStackProto
     [MallardMigration2.MigrationMappingCard]()
   }
 
-  var modernManagedObjectModel: NSManagedObjectModel
+  public var modernManagedObjectModel: NSManagedObjectModel
   // open class var ProjectListingType: NSManagedObject.Type?
   // open class var ProjectListingEntityName: String?
 

@@ -6,6 +6,7 @@ import AdAstraDBStackCore
 
 extension HistorianController {
     
+  #if Disabled
     
     public func askUserToSendArchiveToDeveloper() {
         try? FileManager.default.removeItem(at: archiveForDevelopmentFile)
@@ -25,5 +26,6 @@ Thanks for help in improving Caleo. An archive of current data will be created a
 
     }
 
+  #endif 
     
 }

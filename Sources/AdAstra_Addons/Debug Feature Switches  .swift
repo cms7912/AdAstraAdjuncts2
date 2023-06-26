@@ -13,6 +13,7 @@ import SwiftUI
 
 // import OrderedCollections
 
+import AdAstraBridgingNSExtensions
 
 let trueDebug: Bool = true
 let falseDebug: Bool = false

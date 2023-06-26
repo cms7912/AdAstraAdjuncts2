@@ -25,6 +25,10 @@ import DeviceKit
 // #if CaleoShareExtension
 // import DeviceKit
 // #endif
+import AdAstra_Addons
+import AdAstraDBStackCore
+  // - for Heartbeat
+
 
 public class AudienceUsher: NSObject, NSFetchedResultsControllerDelegate, ObservableObject {
    

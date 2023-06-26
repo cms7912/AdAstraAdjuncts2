@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import AdAstraDBStackCore
 
 public struct AudienceMembersListView: View {
    // @FetchRequest(entity: AudienceMember.entity(),

@@ -9,10 +9,10 @@ import Foundation
 
 #if os(macOS)
 import AppKit
-//import AdAstraBridgingByShim
+import AdAstraBridgingByShim
 
 public extension NSColor {
-  static var label: NSColor { self.labelColor }
+//  static var label: NSColor { self.labelColor }
   
     static var aaSystemGray2: NSColor {
       NSColor.isLightMode ?

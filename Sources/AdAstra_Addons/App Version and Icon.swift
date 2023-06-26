@@ -12,9 +12,11 @@ import SwiftUI
 #if os(iOS)
 import UIKit
 fileprivate typealias UINSApplication = UIApplication
+typealias UINSImage = UIImage
 #elseif os(macOS)
 import AppKit
 fileprivate typealias UINSApplication = NSApplication
+typealias UINSImage = NSImage
 #endif
 
 
@@ -71,19 +73,28 @@ public struct AppIcon: View {
 // #if !TARGET_OS_OSX
 #if os(iOS)
 	var iconImage: UIImage? = UIImage(named: Bundle.main.iconFileName)
+
+  public var body: some View {
+    if let iconImage = iconImage {
+      Image(uiImage: iconImage)
+    } else {
+      EmptyView()
+    }
+  }
 #else //if TARGET_OS_OSX //if TARGET_OS_IOS
 	// #else
 	var iconImage: NSImage? = NSImage(named: Bundle.main.iconFileName)
+
+  public var body: some View {
+    if let iconImage = iconImage {
+      Image(nsImage: iconImage)
+    } else {
+      EmptyView()
+    }
+  }
 #endif
 
-	public var body: some View {
-		if let iconImage = iconImage {
-			Image(uiImage: iconImage)
-		} else {
-			EmptyView()
-		}
-
 		// https://stackoverflow.com/questions/62063972/how-do-i-include-ios-app-icon-image-within-the-app-itself
-	}
+	
 
 }

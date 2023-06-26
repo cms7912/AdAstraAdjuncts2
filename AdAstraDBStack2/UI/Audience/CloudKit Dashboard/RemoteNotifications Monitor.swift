@@ -9,6 +9,7 @@ import Foundation
 // import CoreData
 import AdAstraExtensions
 import os.log
+import AALogger
 
 public class RemoteNotificationsMonitor: ObservableObject {
    static var shared: RemoteNotificationsMonitor = RemoteNotificationsMonitor()

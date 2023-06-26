@@ -8,10 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		CBB05CB72A47D53D0036DCFB /* AdAstraAdjuncts2.h in Headers */ = {isa = PBXBuildFile; fileRef = CBB05CB62A47D53D0036DCFB /* AdAstraAdjuncts2.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CBD167A02A47E5A200AE4D23 /* AdAstra_Extensions2 in Frameworks */ = {isa = PBXBuildFile; productRef = CBD1679F2A47E5A200AE4D23 /* AdAstra_Extensions2 */; };
+		CBC222CC2A49261C00EA715A /* AdAstraDBStackCore in Frameworks */ = {isa = PBXBuildFile; productRef = CBC222CB2A49261C00EA715A /* AdAstraDBStackCore */; };
+		CBC222CE2A49261C00EA715A /* AdAstraDBStackUI in Frameworks */ = {isa = PBXBuildFile; productRef = CBC222CD2A49261C00EA715A /* AdAstraDBStackUI */; };
+		CBC222D02A49261C00EA715A /* AdAstraExtensions2 in Frameworks */ = {isa = PBXBuildFile; productRef = CBC222CF2A49261C00EA715A /* AdAstraExtensions2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB5BFC712A49249300AE7503 /* AdAstraExtensions2 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AdAstraExtensions2; path = ../AdAstraExtensions2; sourceTree = "<group>"; };
+		CB5BFC722A49249900AE7503 /* AdAstraAdjuncts2 */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AdAstraAdjuncts2; path = "/Users/cms/GitHub Repositories/AdAstraAdjuncts2"; sourceTree = "<absolute>"; };
+		CB5BFC732A4924A500AE7503 /* AdAstraDBStack */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AdAstraDBStack; path = ../AdAstraDBStack; sourceTree = "<group>"; };
 		CBB05CB32A47D53D0036DCFB /* AdAstraAdjuncts2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdAstraAdjuncts2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBB05CB62A47D53D0036DCFB /* AdAstraAdjuncts2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdAstraAdjuncts2.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -21,18 +26,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBD167A02A47E5A200AE4D23 /* AdAstra_Extensions2 in Frameworks */,
+				CBC222CE2A49261C00EA715A /* AdAstraDBStackUI in Frameworks */,
+				CBC222D02A49261C00EA715A /* AdAstraExtensions2 in Frameworks */,
+				CBC222CC2A49261C00EA715A /* AdAstraDBStackCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CB5BFC702A49249300AE7503 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CB5BFC732A4924A500AE7503 /* AdAstraDBStack */,
+				CB5BFC722A49249900AE7503 /* AdAstraAdjuncts2 */,
+				CB5BFC712A49249300AE7503 /* AdAstraExtensions2 */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CBB05CA92A47D53D0036DCFB = {
 			isa = PBXGroup;
 			children = (
 				CBB05CB52A47D53D0036DCFB /* AdAstraAdjuncts2 */,
 				CBB05CB42A47D53D0036DCFB /* Products */,
+				CB5BFC702A49249300AE7503 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,7 +99,9 @@
 			);
 			name = AdAstraAdjuncts2;
 			packageProductDependencies = (
-				CBD1679F2A47E5A200AE4D23 /* AdAstra_Extensions2 */,
+				CBC222CB2A49261C00EA715A /* AdAstraDBStackCore */,
+				CBC222CD2A49261C00EA715A /* AdAstraDBStackUI */,
+				CBC222CF2A49261C00EA715A /* AdAstraExtensions2 */,
 			);
 			productName = AdAstraAdjuncts2;
 			productReference = CBB05CB32A47D53D0036DCFB /* AdAstraAdjuncts2.framework */;
@@ -380,9 +400,17 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CBD1679F2A47E5A200AE4D23 /* AdAstra_Extensions2 */ = {
+		CBC222CB2A49261C00EA715A /* AdAstraDBStackCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = AdAstra_Extensions2;
+			productName = AdAstraDBStackCore;
+		};
+		CBC222CD2A49261C00EA715A /* AdAstraDBStackUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AdAstraDBStackUI;
+		};
+		CBC222CF2A49261C00EA715A /* AdAstraExtensions2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AdAstraExtensions2;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

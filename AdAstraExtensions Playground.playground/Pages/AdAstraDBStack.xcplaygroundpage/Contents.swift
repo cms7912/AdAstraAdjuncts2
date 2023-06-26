@@ -4,8 +4,8 @@ import Foundation
 import AppKit
 import PlaygroundSupport
 
-import AdAstra_Extensions2
-import AdAstraDBStack
+import AdAstraExtensions
+import AdAstraDBStackCore
 
 let nibFile = NSNib.Name("MyView")
 var topLevelObjects : NSArray?
@@ -19,6 +19,6 @@ PlaygroundPage.current.liveView = views[0] as! NSView
 
 
 
-_ = ProjectsDBStack
+//_ = ProjectsDBStack(inTempFolderTesting: true, projectFolder: URL(fileURLWithPath: "/"))
 
 //: [Next](@next)

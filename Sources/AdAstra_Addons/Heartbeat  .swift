@@ -116,7 +116,10 @@ public class AdAstraHeartbeat: NSObject {
       }
       // if cancelled { llog("⏹ previously cancelled"); return }
       llog("will call closure()")
-      if originatingQueue == nil { CrashDuringDebug🛑() }
+     if originatingQueue == nil {
+//       CrashDuringDebug🛑()
+     assertionFailure()
+     }
       originatingQueue?.async {
          self.closure()
       }

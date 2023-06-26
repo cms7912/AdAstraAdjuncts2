@@ -54,7 +54,7 @@ let package = Package( // "The configuration of a Swift package."
                 //                    "AdAstraMockCoreData",
                 //                    "SFSafeSymbols",
             ]
-            , path: "AdAstraDBStack/Core"
+            , path: "AdAstraDBStack2/Core"
             , resources: [.copy("Resources")] // <- `copy` or `process` doesn't really matter
             // https://stackoverflow.com/questions/63237395/generating-resource-bundle-accessor-type-bundle-has-no-member-module
         )
@@ -69,8 +69,9 @@ let package = Package( // "The configuration of a Swift package."
                 "AdAstraBridgingByShim",
                 //                    "AdAstraMockCoreData",
                 "SFSafeSymbols",
+                "AdAstra_Addons"
             ]
-            , path: "AdAstraDBStack/UI"
+            , path: "AdAstraDBStack2/UI"
             //               , resources: [.copy("Resources")] // <- `copy` or `process` doesn't really matter
         )
         
@@ -88,18 +89,19 @@ let package = Package( // "The configuration of a Swift package."
                 //                    "AdAstraMockCoreData",
                 //                    "SFSafeSymbols",
             ]
-            , path: "AdAstraDBStack/ImportExport"
+            , path: "AdAstraDBStack2/ImportExport"
             //               , resources: [.copy("Resources")] // <- `copy` or `process` doesn't really matter
         )
         
         
         , .target( name: "AALogger", dependencies:[ "AdAstraExtensions", ] , path: "Sources/AALogger" )
-        , .target( name: "AAFileManager", dependencies:[ "AdAstraExtensions", ] , path: "Sources/AAFileManager" )
+        , .target( name: "AAFileManager", dependencies:[ "AdAstraExtensions", "AALogger", ] , path: "Sources/AAFileManager" )
+        , .target( name: "AdAstra_Addons", dependencies:[ "AdAstraExtensions", "AALogger", "AdAstraBridgingNSExtensions"] , path: "Sources/AdAstra_Addons" )
         
         , .target( name: "AdAstra_Multiplatform", dependencies:[ "AdAstraExtensions", ] , path: "Sources/AdAstra_Multiplatform" )
         , .target( name: "AdAstraBridgingByMask", dependencies:[ "AdAstraExtensions",] , path: "Sources/AdAstra_MultiplatformBridgingByMask" )
-        , .target( name: "AdAstraBridgingByShim", dependencies:[ "AdAstraExtensions", "AdAstraBridgingNSExtensions" ] , path: "Sources/AdAstra_MultiplatformBridgingByShim" )
-        , .target( name: "AdAstraBridgingNSExtensions", dependencies:[ "AdAstraExtensions"] , path: "Sources/AdAstra_MultiplatformBridgingNSExtensions" )
+        , .target( name: "AdAstraBridgingByShim", dependencies:[ "AdAstraExtensions" ] , path: "Sources/AdAstra_MultiplatformBridgingByShim" )
+        , .target( name: "AdAstraBridgingNSExtensions", dependencies:[ "AdAstraExtensions", "AdAstraBridgingByMask", "AdAstraBridgingByShim"] , path: "Sources/AdAstra_MultiplatformBridgingNSExtensions" )
         
         
         

@@ -160,7 +160,7 @@ public class VerticallyCenteredTextView: UINSTextView {
   #endif
 }
 
-
+#if Disabled
 public extension UINSApplication {
   // Presenting An Alert on both platforms
   static func presentAlert(_ alert: UINSAlertController) {
@@ -186,3 +186,4 @@ public extension UINSApplication {
   }
 }
 
+#endif 

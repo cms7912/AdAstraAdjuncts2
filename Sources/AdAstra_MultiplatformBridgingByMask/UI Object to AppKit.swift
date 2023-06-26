@@ -17,7 +17,7 @@ public enum Device {
 
 import AppKit
 
-import AdAstraBridgingNSExtensions
+//import AdAstraBridgingNSExtensions
 
 public typealias UIView = NSView
 public typealias UIColor = NSColor
@@ -41,14 +41,14 @@ public typealias UINSSplitViewDelegate = NSSplitViewDelegate
 public typealias UILayoutPriority = NSLayoutConstraint.Priority
 
 public typealias UIAlertController = NSAlert
-public typealias UIAlertAction = NSAppAlertAction // bridge below for NS UIAlertAction
+//public typealias UIAlertAction = NSAppAlertAction // bridge below for NS UIAlertAction
 
 public typealias UIApplication = NSApplication
 public typealias UIApplicationDelegate = NSApplicationDelegate
 // public typealias UIBackgroundFetchResult = NSBackgroundFetchResult
 public typealias UIViewController = NSViewController
 
-public typealias UIDocumentPickerDelegate = NSDocumentPickerDelegate
+//public typealias UIDocumentPickerDelegate = NSDocumentPickerDelegate
 
 
 public typealias UICollectionView = NSCollectionView

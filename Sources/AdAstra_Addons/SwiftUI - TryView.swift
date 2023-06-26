@@ -17,15 +17,15 @@ public struct TryViewCatchKey: PreferenceKey {
 
 
 public protocol TryViewOnError: View {
-  var errorMessage: Error { get }
+  var errorMessage: AAErrorMessage { get }
 }
 
 
 // extension String: TryViewOnError {
 extension String: TryViewOnError {
   // public var message: String { self }
-  public var errorMessage: Error {
-//    AAErrorMessage(self, self)
+  public var errorMessage: AAErrorMessage {
+    AAErrorMessage(self, self)
   }
 
   public var body: some View {

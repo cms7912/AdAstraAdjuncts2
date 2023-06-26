@@ -9,7 +9,7 @@ import Foundation
 
 #if os(macOS)
 import AppKit
-import AdAstraBridgingNSExtensions
+//import AdAstraBridgingNSExtensions
 
 public typealias UINSView = NSView
 public typealias UINSColor = NSColor
@@ -44,13 +44,13 @@ public typealias UINSUserInterfaceLayoutOrientation = NSUserInterfaceLayoutOrien
 public typealias UINSLayoutPriority = NSLayoutConstraint.Priority
 
 public typealias UINSAlertController = NSAlert
-public typealias UINSAlertAction = NSAppAlertAction // bridge below for NS UIAlertAction
+//public typealias UINSAlertAction = NSAppAlertAction // bridge below for NS UIAlertAction
 
 public typealias UINSApplication = NSApplication
 public typealias UINSApplicationDelegate = NSApplicationDelegate
 // public typealias UINSViewController = NSViewController
 
-public typealias UINSDocumentPickerDelegate = NSDocumentPickerDelegate
+//public typealias UINSDocumentPickerDelegate = NSDocumentPickerDelegate
 
 public typealias UINSEvent = NSEvent
 
