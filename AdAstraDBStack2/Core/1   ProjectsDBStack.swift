@@ -382,5 +382,32 @@ open class ProjectsDBStack: NSObject, ObservableObject // , ProjectsDBStackProto
     case MissingStack
     case MissingStore
   }
+  
+  
+  
+  
+  
+  
+  // MARK: - Import/Export -
+
+  open func duplicate(_ objectID: NSManagedObjectID,
+                      completionHandler: @escaping (Bool, Error?) -> Void = {_, _ in }
+  ){
+  }
+  
+  // Duplicate given project
+  open func duplicateProject(_ objectID: NSManagedObjectID, completionHandler: @escaping (Bool, Error?) -> Void = {_, _ in }) { duplicate(objectID, completionHandler: completionHandler) }
+  
+  /// Called on external sourceStack before it is imported to destinationStack
+  open func preImportProcessing() {
+    // before importing this stack instance, do these things
+  }
+  
+  /// Called on external destinationStack after successfully exporting from sourceStack
+  open func postExportProcessing() {
+    // after export, do these things on this exported stack instance
+  }
+  
+
 }
 

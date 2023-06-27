@@ -29,6 +29,11 @@ let package = Package( // "The configuration of a Swift package."
     ),
 
       .library(
+      name: "AdAstraDBStackImportExport",
+      targets: ["AdAstraDBStackImportExport"]
+    ),
+
+      .library(
       name: "AdAstraBridgingByShim",
       targets: ["AdAstraBridgingByShim"]
     ),

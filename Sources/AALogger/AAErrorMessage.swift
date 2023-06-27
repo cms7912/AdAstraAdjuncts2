@@ -2,7 +2,7 @@ import SwiftUI
 import AALogger
 import os.log
 
-public struct AAErrorMessage: Error, TryViewOnError {
+public struct AAErrorMessage: Error {
   public static var UnexpectedNil: Self = AAErrorMessage("Internal expected value is missing", "General 'UnexpectedNil' error")
   public static var UnexpectedSwitchDefault: Self = AAErrorMessage("Internal expected value is missing", "General 'UnexpectedSwitchDefault' error")
   public static var UnexpectedDevPath: Self = AAErrorMessage("Internal execution stumbled.", "General 'UnexpectedDevPath' error")
@@ -17,25 +17,7 @@ public struct AAErrorMessage: Error, TryViewOnError {
     self.userMessage = userMessage
   }
 
-  let devMessage: String
-  let userMessage: String?
-  public var body: some View {
-    LLog(devMessage)
-    return VStack{
-      Self.ErrorView(userMessage: userMessage ?? "Default Error")
-      #if DEBUG
-      Text(devMessage)
-      #endif
-    }
-  }
-
-  struct ErrorView: View {
-    @State var userMessage: String
-    public var body: some View {
-      Text(userMessage)
-        .foregroundColor(Color.white)
-        .background{ AdAstraColor.yellow.dark }
-    }
-  }
+  public let devMessage: String
+  public let userMessage: String?
 }
 

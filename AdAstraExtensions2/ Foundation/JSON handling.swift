@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import AALogger
+//import AALogger
 // import CoreData
 
 typealias MetadataDictionary = [String: Codable]
@@ -28,7 +28,7 @@ public struct JSONData: Codable, Equatable {
     do {
       try self.init(d)
     } catch {
-      LLog("JSONData error:\(error.localizedDescription)")
+//      LLog("JSONData error:\(error.localizedDescription)")
       throw error
     }
   }
@@ -41,7 +41,7 @@ public extension JSONData{
     do {
       return try JSONDecoder.decode(T.self, from: data)
     } catch {
-      LLog("jsonTo error:\(error.localizedDescription)")
+//      LLog("jsonTo error:\(error.localizedDescription)")
       throw error
     }
   }
@@ -70,7 +70,7 @@ public extension JSONCodable {
     do {
       return try JSONDecoder.decode(Self.self, from: jsonData.data)
     } catch {
-      LLog("jsonTo: \(error.localizedDescription)")
+//      LLog("jsonTo: \(error.localizedDescription)")
       throw error
     }
   }
@@ -81,7 +81,7 @@ public extension JSONCodable {
     do {
       return try JSONDecoder.decode(Self.self, from: jsonData.data)
     } catch {
-      LLog("jsonTo :\(error.localizedDescription)")
+//      LLog("jsonTo :\(error.localizedDescription)")
       return nil
     }
   }

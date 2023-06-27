@@ -1,5 +1,6 @@
 import SwiftUI
 import OSLog
+import AALogger
 
 public struct TryViewCatchKey: PreferenceKey {
   public enum TryViewError {
@@ -19,7 +20,27 @@ public struct TryViewCatchKey: PreferenceKey {
 public protocol TryViewOnError: View {
   var errorMessage: AAErrorMessage { get }
 }
+extension AAErrorMessage: TryViewOnError {
+  struct ErrorView: View {
+    @State var userMessage: String
+    public var body: some View {
+      Text(userMessage)
+        .foregroundColor(Color.white)
+        .background{ AdAstraColor.yellow.dark }
+    }
+  }
+  
+  public var body: some View {
+    LLog(devMessage)
+    return VStack{
+      Self.ErrorView(userMessage: userMessage ?? "Default Error")
+      #if DEBUG
+      Text(devMessage)
+      #endif
+    }
+  }
 
+}
 
 // extension String: TryViewOnError {
 extension String: TryViewOnError {

@@ -18,39 +18,13 @@ import AdAstraDBStackCore
 
 
 extension ProjectsDBStack {
-   public typealias TransitionCompletionHandler = (Bool, Error?) -> Void
-   // public typealias TransitionCompletionHandlerThrows = (Bool, Error?) throws -> Void
-   public typealias TransitionCompletionHandlerWithURL = (URL?, Error?) -> Void
-   // public typealias TransitionCompletionHandlerWithURLThrows = (URL?, Error?) throws -> Void
-	public typealias TransferRootObjectCompletionHandler = (NSManagedObjectID?, Error?) -> Void
-public typealias TransferHandlerWithStack = (ProjectsDBStack) -> Void
-
-	func duplicate(_ objectID: NSManagedObjectID,
-				   completionHandler: @escaping (Bool, Error?) -> Void = {_, _ in }
-	){
-	}
-    
-    
-    
-    
-    
-    // MARK: - Import/Export -
-
-    // Duplicate given project
-     func duplicateProject(_ objectID: NSManagedObjectID, completionHandler: @escaping (Bool, Error?) -> Void = {_, _ in }) { duplicate(objectID, completionHandler: completionHandler) }
-      
-    /// Called on external sourceStack before it is imported to destinationStack
-     func preImportProcessing() {
-      // before importing this stack instance, do these things
-    }
-
-    /// Called on external destinationStack after successfully exporting from sourceStack
-     func postExportProcessing() {
-      // after export, do these things on this exported stack instance
-    }
-
-
-
+  public typealias TransitionCompletionHandler = (Bool, Error?) -> Void
+  // public typealias TransitionCompletionHandlerThrows = (Bool, Error?) throws -> Void
+  public typealias TransitionCompletionHandlerWithURL = (URL?, Error?) -> Void
+  // public typealias TransitionCompletionHandlerWithURLThrows = (URL?, Error?) throws -> Void
+  public typealias TransferRootObjectCompletionHandler = (NSManagedObjectID?, Error?) -> Void
+  public typealias TransferHandlerWithStack = (ProjectsDBStack) -> Void
+  
 }
 
 
