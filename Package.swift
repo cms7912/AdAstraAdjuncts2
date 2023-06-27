@@ -28,6 +28,7 @@ let package = Package( // "The configuration of a Swift package."
     
     //Sources/:
       .library( name: "AALogger", targets: ["AALogger"] ),
+      .library( name: "AAQuantumValue", targets: ["AAQuantumValue"] ),
       .library( name: "AdAstraBridgingByShim", targets: ["AdAstraBridgingByShim"] ),
             ]
   
@@ -98,8 +99,12 @@ let package = Package( // "The configuration of a Swift package."
     )
     
     
-    , .target( name: "AALogger", dependencies:[ "AdAstraExtensions", ] , path: "Sources/AALogger" )
+    // Sources/
     , .target( name: "AAFileManager", dependencies:[ "AdAstraExtensions", "AALogger", ] , path: "Sources/AAFileManager" )
+    , .target( name: "AALogger", dependencies:[ "AdAstraExtensions", ] , path: "Sources/AALogger" )
+    , .target( name: "AAQuantumValue", dependencies:[ "AdAstraExtensions", "AALogger" ] , path: "Sources/AAQuantumValue" )
+    
+    
     , .target( name: "AdAstra_Addons", dependencies:[ "AdAstraExtensions", "AALogger", "AdAstraBridgingNSExtensions"] , path: "Sources/AdAstra_Addons" )
     
     , .target( name: "AdAstra_Multiplatform", dependencies:[ "AdAstraExtensions", ] , path: "Sources/AdAstra_Multiplatform" )

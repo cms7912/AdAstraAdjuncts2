@@ -6,6 +6,9 @@
 //
 
 import Foundation
+@_exported import AdAstraExtensions
+@_exported import AALogger
+
 
 public protocol Quantumable {
   // JSON handling uses try/throw/catch, so not expecting 'asQuantumValue' to always suceed without throwing an error

@@ -6,7 +6,6 @@
 //
 import Foundation
 
-
 // // MARK: - QuantumValue base types (most also expressible as literals)
 
 extension QuantumValue:

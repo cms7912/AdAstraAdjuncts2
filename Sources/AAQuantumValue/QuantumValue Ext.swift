@@ -15,19 +15,26 @@ extension QuantumValue // Debugging check for incorrect type
     Self.qvCheckInProgress = true
     if false {
     } else if (try? asInt) != nil {
-      CrashDuringDebug🛑("QuantumValue accessed wrong case, .asInt has the value")
+//      CrashDuringDebug🛑("QuantumValue accessed wrong case, .asInt has the value")
+      assertionFailure()
     } else if (try? asDouble).isNotNil {
-      CrashDuringDebug🛑("QuantumValue accessed wrong case, .asDouble has the value")
+//      CrashDuringDebug🛑("QuantumValue accessed wrong case, .asDouble has the value")
+      assertionFailure()
     } else if (try? asString).isNotNil {
-      CrashDuringDebug🛑("QuantumValue accessed wrong case, .asString has the value")
+//      CrashDuringDebug🛑("QuantumValue accessed wrong case, .asString has the value")
+      assertionFailure()
       // } else if asDate.isNotNil {
-      CrashDuringDebug🛑("QuantumValue accessed wrong case, .asDate has the value")
+//      CrashDuringDebug🛑("QuantumValue accessed wrong case, .asDate has the value")
+      assertionFailure()
     } else if (try? asBool).isNotNil {
-      CrashDuringDebug🛑("QuantumValue accessed wrong case, .asBool has the value")
+//      CrashDuringDebug🛑("QuantumValue accessed wrong case, .asBool has the value")
+      assertionFailure()
       // } else if asUUID.isNotNil {
-      CrashDuringDebug🛑("QuantumValue accessed wrong case, .asUUID has the value")
+//      CrashDuringDebug🛑("QuantumValue accessed wrong case, .asUUID has the value")
+      assertionFailure()
     } else if (try? asData).isNotNil {
-      CrashDuringDebug🛑("QuantumValue accessed wrong case, .asData has the value")
+//      CrashDuringDebug🛑("QuantumValue accessed wrong case, .asData has the value")
+      assertionFailure()
       // } else if asJSONData.isNotNil {
       //   CrashDuringDebug🛑("QuantumValue accessed wrong case, .json has the value")
       // } else if asArray.isNotNil {

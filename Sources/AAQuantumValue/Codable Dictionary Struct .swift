@@ -210,7 +210,8 @@ public extension CodableDictionaryProtocol { // un/archiving:
     do{
       dataStore = try NSKeyedArchiver.archivedData(withRootObject: value!, requiringSecureCoding: true)
     } catch {
-      CrashDuringDebug🛑("failed to archive data that was not nil")
+//      CrashDuringDebug🛑("failed to archive data that was not nil")
+      assertionFailure()
       dataStore = nil
     }
     // need to use 'inout' instead of direct assignment. The protocol doesn't know about the propertyWrapper '@CodableDictionary' but apparently it does know the instance is a struct ... and therefore errors that self is immutable.
@@ -220,7 +221,8 @@ public extension CodableDictionaryProtocol { // un/archiving:
     do {
       return try JSONEncoder.encode(self)
     } catch {
-      CrashDuringDebug🛑("failed to encode an  existing self")
+//      CrashDuringDebug🛑("failed to encode an  existing self")
+      assertionFailure()
       return nil
     }
   }
