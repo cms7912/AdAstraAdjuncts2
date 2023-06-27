@@ -18,25 +18,17 @@ let package = Package( // "The configuration of a Swift package."
       targets: ["AdAstraExtensions"]
     ),
     
-      .library(
-        name: "AdAstraDBStackCore",
-        targets: ["AdAstraDBStackCore"]
-      ),
+    //AdAstra DB Stack:
+      .library( name: "AdAstraDBStackCore", targets: ["AdAstraDBStackCore"] ),
 
-      .library(
-      name: "AdAstraDBStackUI",
-      targets: ["AdAstraDBStackUI"]
-    ),
+      .library( name: "AdAstraDBStackUI", targets: ["AdAstraDBStackUI"] ),
 
-      .library(
-      name: "AdAstraDBStackImportExport",
-      targets: ["AdAstraDBStackImportExport"]
-    ),
+      .library( name: "AdAstraDBStackImportExport", targets: ["AdAstraDBStackImportExport"] ),
 
-      .library(
-      name: "AdAstraBridgingByShim",
-      targets: ["AdAstraBridgingByShim"]
-    ),
+    
+    //Sources/:
+      .library( name: "AALogger", targets: ["AALogger"] ),
+      .library( name: "AdAstraBridgingByShim", targets: ["AdAstraBridgingByShim"] ),
             ]
   
   , dependencies: [
