@@ -357,6 +357,12 @@ public extension CoreData.NSManagedObjectContext {
 
     #endif
   }
+    
+    func object(withObjectIDAsURIString objectIDAsURIString: String) -> NSManagedObject? {
+        guard let objectURI = URL(string: objectIDAsURIString),
+              let objectID = persistentStoreCoordinator?.managedObjectID(forURIRepresentation: objectURI) else { return nil }
+        return self.object(with: objectID)
+    }
 }
 
 
