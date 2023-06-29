@@ -11,7 +11,9 @@ import SwiftUI
 
 // #if canImport(HotReloading) && DEBUG && !targetEnvironment(simulator) && TRUE
 #if DEBUG
-@_exported import HotReloading
+//@_exported import HotReloading
+import HotReloading
+//@_exported import AdAstraHotReloading
 
 private var loadInjection: () = {
   guard objc_getClass("InjectionClient") == nil else {
