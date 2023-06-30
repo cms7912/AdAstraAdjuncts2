@@ -26,7 +26,8 @@ extension AAErrorMessage: TryViewOnError {
     public var body: some View {
       Text(userMessage)
         .foregroundColor(Color.white)
-        .background{ AdAstraColor.yellow.dark }
+//        .background{ AdAstraColor.yellow.dark }
+        .background{ Color.yellow }
     }
   }
   
