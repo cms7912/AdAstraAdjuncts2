@@ -11,7 +11,7 @@ import SwiftUI
 // import AdAstraBridgingByMask
 // import AdAstraBridgingNSExtensions
 #endif
-
+import AdAstraExtensions
 
 public enum AdAstraColor: CaseIterable {
     public static var CollaboratorColors: [AdAstraColor] = { [
