@@ -29,7 +29,7 @@ public extension Quantumable where Self == JSONData {
 }
 #endif
 
-public enum QuantumValue: JSONCodable, Equatable {
+public enum QuantumValue: JSONCodable, Equatable, Hashable {
   case int(Int)
   case double(Double)
   case string(String)
@@ -40,7 +40,7 @@ public enum QuantumValue: JSONCodable, Equatable {
   // case json(JSONData)
   // case array([QuantumValue])
   // case dictionary(Dictionary<QuantumValue,QuantumValue>)
-
+  
   public init(from decoder: Decoder) throws {
     if false { }
     else if let int = try? decoder.singleValueContainer().decode(Int.self) { self = .int(int) }
@@ -53,11 +53,11 @@ public enum QuantumValue: JSONCodable, Equatable {
     // else if let v = try? decoder.singleValueContainer().decode(JSONData.self) { self = .json(v) }
     // else if let v = try? decoder.singleValueContainer().decode([QuantumValue].self) { self = .array(v) }
     // else if let v = try? decoder.singleValueContainer().decode(Dictionary<QuantumValue,QuantumValue>.self) { self = .dictionary(v) }
-
+    
     throw QuantumError.missingValue
   }
-
-
+  
+  
   public init(_ newValue: Quantumable) throws {
     // if false { fatalError()
     // } else if let v = newValue as? Int? { self = .int(v)
@@ -75,38 +75,38 @@ public enum QuantumValue: JSONCodable, Equatable {
     //   CrashDuringDebug🛑("QuantumValue failed to unwrap newValue")
     //   fatalError()
     // }
-
+    
     self = try newValue.asQuantumValue
   }
-
-
+  
+  
   public func to<Q: Quantumable>(_ q: Q.Type) throws -> Q {
     try q.init(self)
   }
-
+  
   /*
    public init?(asPossible newValue: QuantumablePossible) throws {
-     guard let qv = try newValue.asQuantumValuePossible else { return nil }
-     self = qv
+   guard let qv = try newValue.asQuantumValuePossible else { return nil }
+   self = qv
    }
-
+   
    public init(asGuarenteed newValue: QuantumableGuarenteed) {
-     self = newValue.asQuantumValueGuarenteed
+   self = newValue.asQuantumValueGuarenteed
    }
-
+   
    public init?(asOptional newValue: QuantumableOptional?) {
-     guard let qv = newValue?.asQuantumValueOptional else {
-       return nil
-     }
-     self = qv
+   guard let qv = newValue?.asQuantumValueOptional else {
+   return nil
    }
-
+   self = qv
+   }
+   
    public init(asThrowing newValue: QuantumableThrowing) throws {
-     self = try newValue.asQuantumValueThrowing
+   self = try newValue.asQuantumValueThrowing
    }
-
+   
    */
-
+  
   // public init(_ newValue: Codable?) {
   //   if let newValue = newValue {
   //     self.init(newValue)
@@ -114,7 +114,7 @@ public enum QuantumValue: JSONCodable, Equatable {
   //     return nil
   //   }
   // }
-
+  
   // public var codableValue: Codable {
   //   switch self {
   //     case let .int(int): return int
@@ -130,27 +130,48 @@ public enum QuantumValue: JSONCodable, Equatable {
   //       // return dictionary
   //   }
   // }
-
+  
   internal enum QuantumError: Error {
     case missingValue
   }
-
+  
   private struct MissingValueStuct: Codable { }
   public static var MissingValue: QuantumValue {
     try! MissingValueStuct().asJSON.asQuantumValue
   }
-
+  
   var isMissingValue: Bool {
     guard let _ = try? JSONData(self).jsonTo(MissingValueStuct.self) else { return false }
     return true
   }
-
+  
   static var MissingValueAsserting: QuantumValue {
     assertionFailure()
     // return QuantumValue.uuid(UUID.zero)
     return MissingValue
   }
   // https://stackoverflow.com/questions/48297263/how-to-use-any-in-codable-type
+  
+  
+  
+  public func hash(into hasher: inout Hasher) {
+    //    hasher.combine(self.typedValue())
+    switch self {
+      case let .int(int): return int.hash(into: &hasher)
+      case let .double(double): return double.hash(into: &hasher)
+      case let .string(string): return string.hash(into: &hasher)
+        // case let .date(date): return date
+      case let .bool(bool): return bool.hash(into: &hasher)
+        // case let .uuid(uuid): return uuid
+      case let .data(data): return data.hash(into: &hasher)
+        // case let .json(json): return json
+        // case let .array(array): return array
+        // case .dictionary(let dictionary):
+        // return dictionary
+    }
+  }
+  
+  
 }
 
 
