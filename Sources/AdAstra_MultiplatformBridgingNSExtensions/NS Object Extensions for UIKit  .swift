@@ -325,6 +325,8 @@ public extension Image {
 }
 
 
+#if Disabled
+
 public protocol UINSViewRepresentable: NSViewRepresentable {
   func makeUIView(context: Context) -> Self.NSViewType
   func updateUIView(_: Self.NSViewType, context: Context)
@@ -334,11 +336,12 @@ public extension UINSViewRepresentable {
   func makeNSView(context: Context) -> Self.NSViewType {
     makeUIView(context: context)
   }
-
   func updateNSView(_ uiView: Self.NSViewType, context: Context) {
     updateUIView(uiView, context: context)
   }
 }
+
+#endif
 
 // public protocol UINSViewControllerRepresentable: NSViewControllerRepresentable {
 // 	func makeUIViewController(context: Context) -> Self.NSViewControllerType
