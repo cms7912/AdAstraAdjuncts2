@@ -33,16 +33,17 @@ let package = Package( // "The configuration of a Swift package."
       .library( name: "AdAstraBridgingByShim", targets: ["AdAstraBridgingByShim"] ),
       .library( name: "AdAstraBridgingNSExtensions", targets: ["AdAstraBridgingNSExtensions"] ),
     
-  .library( name: "AdAstraHotReloading", targets: ["AdAstraHotReloading"] ),
+//  .library( name: "AdAstraHotReloading", targets: ["AdAstraHotReloading"] ),
     
     
             ]
   
   , dependencies: [
-    .package(url: "https://github.com/marmelroy/Zip.git", .upToNextMajor(from: "2.1.1"))
-    , .package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", from: .init(4, 0, 0))
+     .package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", from: .init(4, 0, 0)),
     
-    , .package(url: "https://github.com/johnno1962/HotReloading", .upToNextMajor(from: .init(4, 0, 0))),
+         .package(url: "https://github.com/marmelroy/Zip.git", .upToNextMajor(from: "2.1.1")),
+
+//         .package(url: "https://github.com/johnno1962/HotReloading", .upToNextMajor(from: .init(4, 0, 0))),
 
   ]
   
@@ -122,7 +123,7 @@ let package = Package( // "The configuration of a Swift package."
     , .target( name: "AdAstraBridgingByShim", dependencies:[ "AdAstraExtensions" ] , path: "Sources/AdAstra_MultiplatformBridgingByShim" )
     , .target( name: "AdAstraBridgingNSExtensions", dependencies:[ "AdAstraExtensions", "AdAstraBridgingByMask", "AdAstraBridgingByShim"] , path: "Sources/AdAstra_MultiplatformBridgingNSExtensions" )
     
-    , .target( name: "AdAstraHotReloading", dependencies:["HotReloading"] , path: "Sources/AdAstra_HotReloading" )
+//    , .target( name: "AdAstraHotReloading", dependencies:["HotReloading"] , path: "Sources/AdAstra_HotReloading" )
     
     
     
