@@ -13,11 +13,12 @@ import CoreData
 import CloudKit
 //#endif
 import AdAstraExtensions
-import AdAstraBridgingByShim   //<- 2023-06-25 need to reenable
+import AdAstraBridgingByShim
 import SwiftUI
 @_exported import AdAstraDBStackCore
 #if true //os(iOS)
 import AdAstra_Addons
+import AAUserInterface
 
 @available(macCatalyst 15, iOS 15, macOS 12, *)
 open class AACollaborationViewModel: NSObject, ObservableObject {
