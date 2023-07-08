@@ -293,12 +293,14 @@ private struct HorizontalSizeClassOnMacKey: EnvironmentKey {
   static let defaultValue: UserInterfaceSizeClass? = UserInterfaceSizeClass.regular
 }
 
+#if Disabled
 public extension EnvironmentValues {
   var horizontalSizeClass: UserInterfaceSizeClass? {
     get { self[HorizontalSizeClassOnMacKey.self] }
     set { self[HorizontalSizeClassOnMacKey.self] = newValue }
   }
 }
+#endif
 
 private struct VerticalSizeClassOnMacKey: EnvironmentKey {
   static let defaultValue: UserInterfaceSizeClass? = UserInterfaceSizeClass.regular

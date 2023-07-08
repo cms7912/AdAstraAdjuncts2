@@ -292,4 +292,14 @@ public extension Color{
 
 
   #endif
+  
+    static var SystemGrayLevels: [Color] = [
+      .systemGray,
+      .systemGray2,
+      .systemGray3,
+      .systemGray4,
+      .systemGray5,
+      .systemGray6,
+    ]
+
 }

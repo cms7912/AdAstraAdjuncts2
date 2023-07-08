@@ -30,6 +30,7 @@ let package = Package( // "The configuration of a Swift package."
       .library( name: "AALogger", targets: ["AALogger"] ),
       .library( name: "AAQuantumValue", targets: ["AAQuantumValue"] ),
       .library( name: "AAUserInterface", targets: ["AAUserInterface"] ),
+      .library( name: "AdAstra_Multiplatform", targets: ["AdAstra_Multiplatform"] ),
       .library( name: "AdAstraBridgingByShim", targets: ["AdAstraBridgingByShim"] ),
       .library( name: "AdAstraBridgingNSExtensions", targets: ["AdAstraBridgingNSExtensions"] ),
     
