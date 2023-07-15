@@ -131,11 +131,14 @@ open class AdAstraNSManagedObject: NSManagedObject {
     return request
   }
 
-  open func performOnBackgroundContext<M: AnyObject>(
+//  open func performOnBackgroundContext<AAMO: AnyObject>(
+  open func performOnBackgroundContext(
+//    open func performOnBackgroundContext<AAMO>(
     whileWaiting: Bool = false,
     _ taskName: String, // = "Unknown task",
     _ qos: DispatchQoS.QoSClass = .utility,
-    _ block: @escaping (NSManagedObjectContext, M) -> Void
+//    _ block: @escaping (NSManagedObjectContext, AAMO) -> Void
+    _ block: @escaping (NSManagedObjectContext, NSManagedObject) -> Void
   ) {
     let id = objectID
 
@@ -147,7 +150,8 @@ open class AdAstraNSManagedObject: NSManagedObject {
 
     if whileWaiting.isOff {
       chosenContext.performWithoutWaiting(taskName) { context in
-        guard let myself = context.object(with: id) as? M else {
+//        guard let myself = context.object(with: id) as? AAMO else {
+        guard let myself = context.object(with: id) as? Self else {
           assertionFailure(); return
         }
         autoreleasepool{
@@ -156,7 +160,8 @@ open class AdAstraNSManagedObject: NSManagedObject {
       }
     } else {
       chosenContext.performWhileWaiting(taskName) { context in
-        guard let myself = context.object(with: id) as? M else {
+//        guard let myself = context.object(with: id) as? AAMO else {
+        guard let myself = context.object(with: id) as? Self else {
           assertionFailure(); return
         }
         autoreleasepool{
