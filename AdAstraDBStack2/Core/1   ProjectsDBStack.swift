@@ -289,6 +289,8 @@ open class ProjectsDBStack: NSObject, ObservableObject // , ProjectsDBStackProto
     return _mainBackgroundContext ?? {
       llog("buildCxt mainBackgroundContext")
       let _mainBackgroundContext = self.newBackgroundContext(named: "DBStack_MnBgCxt")
+//        _mainBackgroundContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyStoreTrumpMergePolicyType)
+//        _mainBackgroundContext.automaticallyMergesChangesFromParent = true
       self._mainBackgroundContext = _mainBackgroundContext
       return _mainBackgroundContext
     }()
@@ -299,6 +301,8 @@ open class ProjectsDBStack: NSObject, ObservableObject // , ProjectsDBStackProto
     return _utilityBackgroundContext ?? {
       llog("buildCxt utilityBackgroundContext")
       let _utilityBackgroundContext = self.newBackgroundContext(named: "utilityBgCxt")
+//        _utilityBackgroundContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyStoreTrumpMergePolicyType)
+//        _utilityBackgroundContext.automaticallyMergesChangesFromParent = true
       self._utilityBackgroundContext = _utilityBackgroundContext
       return _utilityBackgroundContext
     }()
