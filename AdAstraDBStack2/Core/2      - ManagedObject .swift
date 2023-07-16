@@ -138,7 +138,7 @@ open class AdAstraNSManagedObject: NSManagedObject {
     _ taskName: String, // = "Unknown task",
     _ qos: DispatchQoS.QoSClass = .utility,
 //    _ block: @escaping (NSManagedObjectContext, AAMO) -> Void
-    _ block: @escaping (NSManagedObjectContext, NSManagedObject) -> Void
+    _ block: @escaping (NSManagedObjectContext, Self) -> Void
   ) {
     let id = objectID
 
