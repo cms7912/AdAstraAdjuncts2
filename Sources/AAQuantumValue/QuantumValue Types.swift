@@ -17,7 +17,8 @@ extension QuantumValue:
   public init(stringLiteral value: Self.StringLiteralType) { self = QuantumValue.string(value) }
   public init(floatLiteral value: Double) { self = QuantumValue.double(value) }
   public init(integerLiteral value: Int) { self = QuantumValue.int(value) }
-  public init(booleanLiteral value: Bool) { self = QuantumValue.bool(value) }
+	public init(booleanLiteral value: Bool) { self = QuantumValue.bool(value) }
+	public init(dataLiteral value: Data) { self = QuantumValue.data(value) }
 
   public typealias FloatLiteralType = Double
   public typealias IntegerLiteralType = Int
