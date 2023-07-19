@@ -95,7 +95,7 @@ open class AdAstraNSManagedObject: NSManagedObject {
     _setValueIfModified(newValue, forKey: key, completionHandler)
   }
 
-  override public func willChangeValue(forKey key: String) {
+  override open func willChangeValue(forKey key: String) {
     super.willChangeValue(forKey: key)
     // self.objectWillChange.send() // on macOS this is creating an error:
     // 'NSInternalInconsistencyException', reason: 'Cannot set BindableObject publisher after it has already been set'
