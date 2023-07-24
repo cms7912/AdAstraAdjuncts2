@@ -5,6 +5,7 @@
 //  Created by CMRS on __/__/__.
 //
 
+// 2023-07-24 To read: https://www.avanderlee.com/debugging/oslog-unified-logging/
 import Foundation
 import AdAstraExtensions
 // import SwiftUI
