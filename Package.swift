@@ -19,33 +19,30 @@ let package = Package( // "The configuration of a Swift package."
     ),
     
     //AdAstra DB Stack:
-      .library( name: "AdAstraDBStackCore", targets: ["AdAstraDBStackCore"] ),
-
+    .library( name: "AdAstraDBStackCore", targets: ["AdAstraDBStackCore"] ),
+    
       .library( name: "AdAstraDBStackUI", targets: ["AdAstraDBStackUI"] ),
-
+    
       .library( name: "AdAstraDBStackImportExport", targets: ["AdAstraDBStackImportExport"] ),
-
+    
     
     //Sources/:
-      .library( name: "AALogger", targets: ["AALogger"] ),
-      .library( name: "AAQuantumValue", targets: ["AAQuantumValue"] ),
-      .library( name: "AAUserInterface", targets: ["AAUserInterface"] ),
-      .library( name: "AdAstra_Multiplatform", targets: ["AdAstra_Multiplatform"] ),
-      .library( name: "AdAstraBridgingByShim", targets: ["AdAstraBridgingByShim"] ),
-      .library( name: "AdAstraBridgingNSExtensions", targets: ["AdAstraBridgingNSExtensions"] ),
+    .library( name: "AALogger", targets: ["AALogger"] ),
+    .library( name: "AAQuantumValue", targets: ["AAQuantumValue"] ),
+    .library( name: "AAUserInterface", targets: ["AAUserInterface"] ),
+    .library( name: "AdAstra_Multiplatform", targets: ["AdAstra_Multiplatform"] ),
+    .library( name: "AdAstraBridgingByShim", targets: ["AdAstraBridgingByShim"] ),
+    .library( name: "AdAstraBridgingNSExtensions", targets: ["AdAstraBridgingNSExtensions"] ),
     
-//  .library( name: "AdAstraHotReloading", targets: ["AdAstraHotReloading"] ),
-    
-    
+//      .library( name: "AdAstraHotReloading", targets: ["AdAstraHotReloading"] ),
             ]
   
   , dependencies: [
-     .package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", from: .init(4, 0, 0)),
+    .package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", from: .init(4, 0, 0)),
     
-         .package(url: "https://github.com/marmelroy/Zip.git", .upToNextMajor(from: "2.1.1")),
-
-//         .package(url: "https://github.com/johnno1962/HotReloading", .upToNextMajor(from: .init(4, 0, 0))),
-
+      .package(url: "https://github.com/marmelroy/Zip.git", .upToNextMajor(from: "2.1.1")),
+    
+//      .package(url: "https://github.com/johnno1962/HotReloading", .upToNextMajor(from: .init(4, 0, 0))),
   ]
   
   , targets: [
@@ -115,7 +112,7 @@ let package = Package( // "The configuration of a Swift package."
     , .target( name: "AALogger", dependencies:[ "AdAstraExtensions", ] , path: "Sources/AALogger" )
     , .target( name: "AAQuantumValue", dependencies:[ "AdAstraExtensions", "AALogger" ] , path: "Sources/AAQuantumValue" )
     , .target( name: "AAUserInterface", dependencies:[ "AdAstraExtensions", "AALogger" ] , path: "Sources/AAUserInterface" )
-
+    
     
     , .target( name: "AdAstra_Addons", dependencies:[ "AdAstraExtensions", "AALogger", "AdAstraBridgingNSExtensions"] , path: "Sources/AdAstra_Addons" )
     
@@ -125,9 +122,6 @@ let package = Package( // "The configuration of a Swift package."
     , .target( name: "AdAstraBridgingNSExtensions", dependencies:[ "AdAstraExtensions", "AdAstraBridgingByMask", "AdAstraBridgingByShim"] , path: "Sources/AdAstra_MultiplatformBridgingNSExtensions" )
     
 //    , .target( name: "AdAstraHotReloading", dependencies:["HotReloading"] , path: "Sources/AdAstra_HotReloading" )
-    
-    
-    
     
   ]
 )

@@ -12,7 +12,7 @@ import SwiftUI
 // #if canImport(HotReloading) && DEBUG && !targetEnvironment(simulator) && TRUE
 #if DEBUG
 //@_exported import HotReloading
-import HotReloading
+//import HotReloading
 //@_exported import AdAstraHotReloading
 
 private var loadInjection: () = {
