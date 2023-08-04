@@ -99,3 +99,16 @@ public extension QuantumValue // representing true/false
     }
   }
 }
+
+
+public extension QuantumValue {
+  var debugDescription: String {
+    switch self {
+      case .bool(let i): i.description
+      case .data(let i): i.description
+      case .double(let i): i.description
+      case .int(let i): i.description
+      case .string(let i): i.description
+    }
+  }
+}
