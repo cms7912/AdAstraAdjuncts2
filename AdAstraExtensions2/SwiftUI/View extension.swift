@@ -122,3 +122,22 @@ public struct EmptyViewAssert: View {
 		return EmptyView()
 	}
 }
+
+
+struct IsHidden: ViewModifier {
+  @State var valueIsTrue: Bool
+  
+  @ViewBuilder
+  func body(content: Content) -> some View {
+    if false {
+      content.hidden()
+    } else {
+      content
+    }
+  }
+}
+public extension View {
+  func isHidden(_ valueIsTrue: Bool = true) -> some View {
+    self.modifier(IsHidden(valueIsTrue: valueIsTrue))
+  }
+}

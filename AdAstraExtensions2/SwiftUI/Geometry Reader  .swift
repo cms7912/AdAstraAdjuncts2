@@ -60,47 +60,47 @@ open class BaseReadGeometryPreferenceKey: PreferenceKey {
 }
 
 public extension View {
-	func readGeometryOnChange(_ PKType: BaseReadGeometryPreferenceKey.Type,
-		in coordinateSpace: CoordinateSpace,
-		onChange: @escaping (GeometryProxy) -> Void) -> some View {
-			background(
-				GeometryReader { geometryProxy in
-					Color.clear
-						.preference(key: PKType, value: GeometryProxyContainer(coordinateSpace: coordinateSpace, geometryProxy: geometryProxy))
-				}
-			)
-			.onPreferenceChange(
-				PKType,
-				perform: { gpc in
-					guard let geometryProxy = gpc.geometryProxy else {
-//						CrashDuringDebug🛑("I don't expect this to happen ... maybe first preference read.")
-            fatalError()
-						return }
-					onChange(geometryProxy)
-				} )
-		}
-
-	func readGeometry(_ PKType: BaseReadGeometryPreferenceKey.Type,
-		in coordinateSpace: CoordinateSpace,
-		onUpdate: @escaping (GeometryProxy) -> Void) -> some View {
-			background(
-				GeometryReader { geometryProxy in
-					Color.clear
-						.preference(key: PKType, value:
-													GeometryProxyContainer(unique: true, coordinateSpace: coordinateSpace, geometryProxy: geometryProxy))
-				}
-			)
-			.onPreferenceChange(
-				PKType,
-				perform: { gpc in
-					guard let geometryProxy = gpc.geometryProxy else {
-//						CrashDuringDebug🛑("I don't expect this to happen ... maybe first preference read.")
-            fatalError()
-						return }
-					onUpdate(geometryProxy)
-				} )
-		}
-
+  func readGeometryOnChange(_ PKType: BaseReadGeometryPreferenceKey.Type,
+                            in coordinateSpace: CoordinateSpace,
+                            onChange: @escaping (GeometryProxy) -> Void) -> some View {
+    background(
+      GeometryReader { geometryProxy in
+        Color.clear
+          .preference(key: PKType, value: GeometryProxyContainer(coordinateSpace: coordinateSpace, geometryProxy: geometryProxy))
+      }
+    )
+    .onPreferenceChange(
+      PKType,
+      perform: { gpc in
+        guard let geometryProxy = gpc.geometryProxy else {
+          //						CrashDuringDebug🛑("I don't expect this to happen ... maybe first preference read.")
+          fatalError()
+          return }
+        onChange(geometryProxy)
+      } )
+  }
+  
+  func readGeometry(_ PKType: BaseReadGeometryPreferenceKey.Type,
+                    in coordinateSpace: CoordinateSpace,
+                    onUpdate: @escaping (GeometryProxy) -> Void) -> some View {
+    background(
+      GeometryReader { geometryProxy in
+        Color.clear
+          .preference(key: PKType, value:
+                        GeometryProxyContainer(unique: true, coordinateSpace: coordinateSpace, geometryProxy: geometryProxy))
+      }
+    )
+    .onPreferenceChange(
+      PKType,
+      perform: { gpc in
+        guard let geometryProxy = gpc.geometryProxy else {
+          //						CrashDuringDebug🛑("I don't expect this to happen ... maybe first preference read.")
+          fatalError()
+          return }
+        onUpdate(geometryProxy)
+      } )
+  }
+  
 }
 
 // struct ReadGeometryPreferenceKey: PreferenceKey {
