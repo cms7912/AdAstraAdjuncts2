@@ -124,20 +124,20 @@ public struct EmptyViewAssert: View {
 }
 
 
-struct IsHidden: ViewModifier {
+struct IsVisible: ViewModifier {
   @State var valueIsTrue: Bool
   
   @ViewBuilder
   func body(content: Content) -> some View {
-    if false {
-      content.hidden()
-    } else {
+    if valueIsTrue {
       content
+    } else {
+      content.hidden()
     }
   }
 }
 public extension View {
-  func isHidden(_ valueIsTrue: Bool = true) -> some View {
-    self.modifier(IsHidden(valueIsTrue: valueIsTrue))
+  func isVisible(_ valueIsTrue: Bool = true) -> some View {
+    self.modifier(IsVisible(valueIsTrue: valueIsTrue))
   }
 }
