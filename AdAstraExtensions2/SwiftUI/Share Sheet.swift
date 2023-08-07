@@ -113,7 +113,7 @@ class ShareSheetRepresentableCoordinator: NSObject, NSSharingServicePickerDelega
 		if let destinationView = NSApplication.shared.windows.first?.contentView {
 			sharingPicker.delegate = self
 			sharingPicker.show(
-				relativeTo: NSRect(x: destinationView.frame.midX,
+        relativeTo: NSRect(x: destinationView.frame.midX,
 													 y: destinationView.frame.midY,
 													 width: 0,
 													 height: 0),
