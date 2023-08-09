@@ -125,7 +125,7 @@ public struct EmptyViewAssert: View {
 
 
 struct IsVisible: ViewModifier {
-  @State var valueIsTrue: Bool
+  @Binding var valueIsTrue: Bool
   
   @ViewBuilder
   func body(content: Content) -> some View {
@@ -137,7 +137,14 @@ struct IsVisible: ViewModifier {
   }
 }
 public extension View {
-  func isVisible(_ valueIsTrue: Bool = true) -> some View {
+  func isVisible(_ valueIsTrue: Binding<Bool> = .constant(true)) -> some View {
     self.modifier(IsVisible(valueIsTrue: valueIsTrue))
   }
+  func isVisible(_ valueIsTrue: Bool = true) -> some View {
+    self.modifier(IsVisible(valueIsTrue:
+                              Binding(getOnly:
+                              {valueIsTrue})
+                            ))
+  }
+
 }
