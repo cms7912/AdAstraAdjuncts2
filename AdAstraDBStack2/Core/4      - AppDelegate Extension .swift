@@ -11,6 +11,7 @@ import CoreData
 // import SFSafeSymbols
 import CloudKit
 import AdAstraExtensions
+import AALogger
 //import AdAstraBridgingByShim
 
 #if os(macOS)

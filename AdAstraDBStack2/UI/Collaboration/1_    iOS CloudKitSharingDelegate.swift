@@ -237,7 +237,8 @@ projectListing is in \({  () -> String in
 
 				default:
 						// any other case is an unkown state
-					CrashDuringDebug🛑("Failed to save share \(error)")
+          // CrashDuringDebug🛑("Failed to save share \(error)")
+          fatalError("Failed to save share \(error)")
 			}
 
 

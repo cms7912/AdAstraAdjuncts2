@@ -8,7 +8,7 @@ let package = Package( // "The configuration of a Swift package."
   name: "AdAstraAdjuncts2",
   platforms: [
     .macOS(.v12)
-    //                , .iOS(15)
+    , .iOS(.v15)
   ],
   products: [ // "A package product defines an externally visible build artifact (library, executable, or plugin) that’s available to clients of a package."
     // Products define the executables and libraries a package produces, making them visible to other packages.
@@ -68,8 +68,16 @@ let package = Package( // "The configuration of a Swift package."
         //                    "SFSafeSymbols",
       ]
       , path: "AdAstraDBStack2/Core"
-      , resources: [.copy("Resources")] // <- `copy` or `process` doesn't really matter
+      // , exclude:["Resources"]
+      , resources: [.process("Resources")] // <- `copy` or `process` 
+      // , resources: [.copy("Resources")] // <- `copy` or `process`
+      // , swiftSettings: [SwiftSetting.unsafeFlags(["CODE_SIGN_STYLE=Manual"])]
+      // , swiftSettings: [SwiftSetting.unsafeFlags(["CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM="])]
+      // , swiftSettings: [SwiftSetting.define("CODE_SIGN_STYLE=Manual")]
+      // , swiftSettings: [SwiftSetting.define("CODE_SIGNING_ALLOWED=NO, CODE_SIGNING_REQUIRED=NO")]
       // https://stackoverflow.com/questions/63237395/generating-resource-bundle-accessor-type-bundle-has-no-member-module
+      // related: https://forums.swift.org/t/xcode-14-beta-code-signing-issues-when-swiftpm-targets-include-resources/59685/4?page=2
+      // with a 'Resources' folder in a package the code signing fails. So '.process' is needed, not '.copy'
     )
     
     
