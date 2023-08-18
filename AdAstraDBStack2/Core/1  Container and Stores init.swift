@@ -11,7 +11,7 @@ import CoreData
 
 extension ProjectsDBStack {
   static func SetupModernModel() throws -> NSManagedObjectModel {
-    let myself = Bundle.module
+    // let myself = Bundle.module
     let modelURL = ModelBundle.url(forResource: Self.ModelPackageName, withExtension: "momd")!
     // let modelURLs = Bundle.allBundles.compactMap{
     // $0.url(forResource: Self.ModelPackageName, withExtension: "momd") }
@@ -55,8 +55,8 @@ extension ProjectsDBStack {
     // let newContainer = NSPersistentCloudKitContainer(
     let newContainer = ProjectsDBStackContainer(
       name: Self.ModelPackageName,
-      managedObjectModel: modernManagedObjectModel,
-      bundle: Bundle.module
+      managedObjectModel: modernManagedObjectModel
+      // , bundle: Bundle.module
     )
     // Setup Private Store
     guard let privateStoreDescription = newContainer.persistentStoreDescriptions.first else { throw MyError.MissingStore }
@@ -126,7 +126,7 @@ extension ProjectsDBStack {
 public final class ProjectsDBStackContainer: NSPersistentCloudKitContainer {
   public init(name: String,
               managedObjectModel: NSManagedObjectModel,
-              bundle _: Bundle = .main,
+              // bundle _: Bundle = .main,
               inMemory _: Bool = false)
   {
     // guard let mom = NSManagedObjectModel.mergedModel(from: [bundle]) else {

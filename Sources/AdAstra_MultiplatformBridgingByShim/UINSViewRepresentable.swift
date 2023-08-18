@@ -28,6 +28,9 @@ public extension UINSViewRepresentable {
     updateView(uiView, context: context) }
 }
 
+public extension UINSHostingController {
+  var uinsView: UIView? { self.view }
+}
 #elseif os(macOS)
 public typealias ViewRepresentable = NSViewRepresentable
 public extension UINSViewRepresentable {
@@ -40,5 +43,8 @@ public extension UINSViewRepresentable {
     updateView(nsView, context: context)
   }
   
+}
+public extension UINSHostingController {
+  var uinsView: NSView? { self.view }
 }
 #endif
