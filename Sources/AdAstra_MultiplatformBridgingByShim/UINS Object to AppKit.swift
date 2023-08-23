@@ -205,6 +205,7 @@ extension NSFont {
   }
 }
 
+
 open class UINSTextView: NSTextView {
   override public init(frame: NSRect, textContainer: NSTextContainer?) {
     super.init(frame: frame, textContainer: textContainer)
@@ -279,23 +280,6 @@ public extension UINSTextView{
   func uinsShouldChangeText(in range: NSRange, replacementText: String?) -> Bool {
     shouldChangeText(in: range, replacementString: replacementText)
   }
-}
-
-public extension NSTextViewDelegate {
-  func uinsTextViewDidEndEditing(_ notification: Notification) {
-    // self.textDidEndEditing(notification)
-    textDidEndEditing?(notification)
-  }
-
-  func uinsTextViewDidChange(notification: Notification) {
-    textDidChange?(notification)
-  }
-
-
-
-  // textView?(<#T##textView: NSTextView##NSTextView#>,
-  //                shouldChangeTextIn: <#T##NSRange#>,
-  //                replacementString: <#T##String?#>)
 }
 
 

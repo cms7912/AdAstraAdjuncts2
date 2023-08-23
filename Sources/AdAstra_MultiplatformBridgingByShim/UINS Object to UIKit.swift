@@ -157,21 +157,11 @@ public extension UINSTextView{
   }
 
   #if canImport(UIKit)
-  func uinsShouldChangeText(in _: UITextRange, replacementText _: String) -> Bool {
-    // self.shouldChangeText(in: range, replacementText: replacementText)
-    return true
+  func uinsShouldChangeText(in range: UITextRange, replacementText: String) -> Bool {
+    self.shouldChangeText(in: range, replacementText: replacementText)
+    // return true
   }
   #endif
-}
-
-public extension UITextViewDelegate {
-  func uinsTextViewDidEndEditing(_ textView: UITextView) {
-    textViewDidEndEditing?(textView)
-  }
-
-  func uinsTextViewDidChange(_ textView: UITextView) {
-    textViewDidChange?(textView)
-  }
 }
 
 #endif
