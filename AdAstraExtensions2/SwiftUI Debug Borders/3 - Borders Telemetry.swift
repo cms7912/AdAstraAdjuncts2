@@ -34,8 +34,8 @@ import SwiftUI
 public class DebugBordersViewModel: ObservableObject {
   public static var shared = DebugBordersViewModel()
   #if DEBUG // && !SANDBOX
-  // public static var DebugBordersOn: Bool = true
- public static var DebugBordersOn: Bool = false
+  public static var DebugBordersOn: Bool = true
+ // public static var DebugBordersOn: Bool = false
   #else
   public static var DebugBordersOn: Bool = false
   #endif
