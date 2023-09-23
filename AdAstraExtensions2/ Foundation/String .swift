@@ -72,6 +72,16 @@ public extension Optional where Wrapped == String {
 			}
 		}
 	}
+  
+  var asZeroLengthIfNil: String {
+    isZeroLengthIfNil
+  }
+
+  var isZeroLengthIfNil: String {
+    if isNil { return "" }
+    return self!
+  }
+
 }
 
 public extension String {

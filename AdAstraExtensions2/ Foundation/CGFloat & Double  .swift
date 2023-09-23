@@ -77,28 +77,6 @@ public extension Optional where Wrapped == CGFloat {
   }
 }
 
-public extension Optional {
-  func unwrapAssertOr(_ alternate: Wrapped) -> Wrapped {
-    if let unwrapped = self { return unwrapped }
-    // CrashDuringDebug()
-    assertionFailure()
-    return alternate
-  }
-
-  @discardableResult
-  func assertIfNil() -> Wrapped? {
-    if let unwrapped = self { return unwrapped }
-    // CrashDuringDebug()
-    assertionFailure()
-    return nil
-  }
-
-  // var test: CGFloat?
-  // test.unwrapAssertOr(0)
-  // -- unwrap, but during debug if nil then assert failure. Or during release return alternate value given
-}
-
-
 
 public extension Optional where Wrapped == CGFloat {
   static func + (lhs: CGFloat?, rhs: CGFloat) -> CGFloat? {

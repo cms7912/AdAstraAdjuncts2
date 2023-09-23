@@ -12,6 +12,21 @@ public protocol DebugDescription {
   var dd: String { get }
 }
 
+extension NSObject: OptionalOptional { }
+// extension Optional: OptionalOptional { }
+
+
+public protocol OptionalOptional {
+  // associatedtype WrappedWrapped = Self
+  var optionalSelf: Self? { get }
+}
+public extension OptionalOptional {
+  var optionalSelf: Self? { self }
+  func assertIfNil() -> Self? {
+    optionalSelf?.assertIfNil()
+  }
+}
+
 public extension Optional {
   var dd: String {
     guard let unwrapped = self else { return "nil"}
@@ -30,16 +45,29 @@ public extension Optional {
   }
 }
 
-public extension Optional where Wrapped == String {
-  var asZeroLengthIfNil: String {
-    isZeroLengthIfNil
+
+public extension Optional {
+  func unwrapAssertOr(_ alternate: Wrapped) -> Wrapped {
+    if let unwrapped = self { return unwrapped }
+    // CrashDuringDebug()
+    assertionFailure()
+    return alternate
   }
 
-  var isZeroLengthIfNil: String {
-    if isNil { return "" }
-    return self!
+  @discardableResult
+  func assertIfNil() -> Wrapped? {
+    if let unwrapped = self { return unwrapped }
+    // CrashDuringDebug()
+    assertionFailure()
+    return nil
   }
+
+  // var test: CGFloat?
+  // test.unwrapAssertOr(0)
+  // -- unwrap, but during debug if nil then assert failure. Or during release return alternate value given
 }
+
+
 
 public extension Optional where Wrapped: Collection {
   var isEmptyOrNil: Bool {
@@ -194,6 +222,7 @@ public extension Optional where Wrapped == UUID {
     return UUID()
   }
 }
+
 
 
 extension NSAttributedString {
