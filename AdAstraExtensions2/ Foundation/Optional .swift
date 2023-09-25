@@ -12,20 +12,30 @@ public protocol DebugDescription {
   var dd: String { get }
 }
 
-extension NSObject: OptionalOptional { }
-// extension Optional: OptionalOptional { }
+// extension NSObject: OptionalOptional { }
 
-
-public protocol OptionalOptional {
-  // associatedtype WrappedWrapped = Self
-  var optionalSelf: Self? { get }
+public protocol OptionalNonOptional {
 }
-public extension OptionalOptional {
-  var optionalSelf: Self? { self }
+
+public extension OptionalNonOptional {
+  
+  @discardableResult
   func assertIfNil() -> Self? {
-    optionalSelf?.assertIfNil()
+    return self
   }
 }
+
+#if true
+public extension Optional {
+  @discardableResult
+  func assertIfNil() -> Wrapped? {
+    if let unwrapped = self { return unwrapped }
+    // CrashDuringDebug()
+    assertionFailure()
+    return nil
+  }
+}
+#endif
 
 public extension Optional {
   var dd: String {
@@ -52,14 +62,6 @@ public extension Optional {
     // CrashDuringDebug()
     assertionFailure()
     return alternate
-  }
-
-  @discardableResult
-  func assertIfNil() -> Wrapped? {
-    if let unwrapped = self { return unwrapped }
-    // CrashDuringDebug()
-    assertionFailure()
-    return nil
   }
 
   // var test: CGFloat?
