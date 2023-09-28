@@ -10,11 +10,11 @@ import CryptoKit
 
 
 #if os(iOS)
-let iOSPlatform: Bool = true
-let macOSPlatform: Bool = false
+public let iOSPlatform: Bool = true
+public let macOSPlatform: Bool = false
 #elseif os(macOS)
-let iOSPlatform: Bool = false
-let macOSPlatform: Bool = true
+public let iOSPlatform: Bool = false
+public let macOSPlatform: Bool = true
 #endif
 
 
