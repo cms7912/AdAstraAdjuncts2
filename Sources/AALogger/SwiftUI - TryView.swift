@@ -18,7 +18,7 @@ public struct TryViewCatchKey: PreferenceKey {
 
 
 public protocol TryViewOnError: View {
-  var errorMessage: AAErrorMessage { get }
+  // var errorMessage: AAErrorMessage { get }
 }
 extension AAErrorMessage: TryViewOnError {
   struct ErrorView: View {
@@ -57,48 +57,49 @@ extension String: TryViewOnError {
 
 // extension View: TryViewOnError { }
 
-public struct TryView<ContentView: View, OnErrorView: TryViewOnError>: View {
+public struct TryView<ContentView: View, OnErrorView: View>: View {
   // public struct TryView<ContentView: View>: View {
   public typealias ContentClosure = () throws -> ContentView
   var content: ContentClosure
   // var content: Content
-  var onCatchError: (AAErrorMessage) -> OnErrorView
+  var onCatchErrorView: (AAErrorMessage) -> OnErrorView
   public init(
     _ content: @escaping ContentClosure,
     // onCatchError: @escaping (AAErrorMessage) -> OnErrorView = {"error: \($0)"}
-    onCatchError: @escaping (AAErrorMessage) -> OnErrorView = {AAErrorMessage(nil, "init error: \($0)")}
+    onCatchErrorView: @escaping (AAErrorMessage) -> OnErrorView = {AAErrorMessage(nil, "init error: \($0)")}
   ) {
     self.content = content
-    self.onCatchError = onCatchError
+    self.onCatchErrorView = onCatchErrorView
   }
 
   public var body: some View {
+    var unpackedCombinedContent = self.unpackCombinedContent()
     Group{
-      if unpackCombinedContent().value.0 {
-        unpackCombinedContent().value.1
+      if unpackedCombinedContent.value.0 {
+        unpackedCombinedContent.value.1
       } else {
-        unpackCombinedContent().value.2
+        unpackedCombinedContent.value.2
       }
     }
   }
 
-  // func unpackCombinedContent() -> TupleView<(ContentView, OnErrorView)> {
-  func unpackCombinedContent() -> TupleView<(Bool, ContentView?, AAErrorMessage)> {
-    // TupleView(content(), onError())
+  func unpackCombinedContent() -> TupleView<(Bool, ContentView?, OnErrorView)> {
 
     var errorMessage = AAErrorMessage(nil, "Default TryView Error Message")
 
     var contentUnwrapped: ContentView?
     do {
       contentUnwrapped = try content()
-      return TupleView((true, contentUnwrapped!, errorMessage))
+      var errorMessage = AAErrorMessage(nil, "no error trapped")
+      return TupleView((true, contentUnwrapped!, onCatchErrorView(errorMessage) ))
+      
     } catch let error as AAErrorMessage {
       errorMessage = error
     } catch {
       errorMessage = AAErrorMessage(nil, error.localizedDescription)
     }
 
-    return TupleView((false, contentUnwrapped, errorMessage))
+    return TupleView((false, contentUnwrapped, onCatchErrorView(errorMessage) ))
   }
 
 

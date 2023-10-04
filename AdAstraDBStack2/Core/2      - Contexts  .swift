@@ -98,7 +98,7 @@ public extension ProjectsDBStack {
     // name = name + "_" + UUID().uuidString // need to enforce uniqueness for transaction history that records contextName
     // }
 
-    llog("named '\(name)'")
+    llog("newBackgroundContext named '\(name)'")
     // newBackgroundContext() associates directly with store coordinator, not a parent context
     // https://developer.apple.com/documentation/coredata/nspersistentcontainer/1640581-newbackgroundcontext
 
