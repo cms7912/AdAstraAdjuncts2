@@ -34,7 +34,8 @@ public protocol DragonCard: Equatable, DragonCardParent {
 public protocol DragonCardParent: Equatable {
 	associatedtype ID: Equatable
 	var objectID: ID { get }
-	static func NormalizeChildrenSortOrder<DragonCard>(for: DragonCard)
+  // static func NormalizeChildrenSortOrder<DragonCard>(for: DragonCard)
+  static func NormalizeChildrenSortOrder(for _: Self?)
 
 }
 
