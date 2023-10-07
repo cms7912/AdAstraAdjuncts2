@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 import AdAstraExtensions
+import AALogger
 
 public class GenericStridesMap: NotchStridesMapProtocol, DivotStridesMapProtocol {
 	lazy public var llogPrefix = { "🦘\( ksvScrollManager?.scrollViewName ?? "") " }()

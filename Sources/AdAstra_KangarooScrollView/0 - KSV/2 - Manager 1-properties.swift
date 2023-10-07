@@ -10,6 +10,7 @@ import AdAstraExtensions
 import SwiftUI
 import Combine
 import AdAstraBridgingByShim
+import AALogger
 
 public protocol KSVScrollVCDelegate: AnyObject {
   // associated type Content: View

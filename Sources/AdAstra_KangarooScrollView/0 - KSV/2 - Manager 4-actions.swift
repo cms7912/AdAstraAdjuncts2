@@ -119,6 +119,7 @@ extension KSVScrollManager {
 llog("!! deltaShift offset is still off !!")
 return
 			
+      #if Disabled
 			if snapScrollingRetryInProgress.isFalse { // check that this is not a re-try
 				llog("deltaShift still exists, will try snapping again: \(deltaShift.dd)")
 				// return;
@@ -136,10 +137,12 @@ return
 					}
 				}
 				// return
+        
 			} else {
 				llog("deltaShift still exists, but already tried re-snapping: \(deltaShift.dd)")
 			}
-
+      #endif
+      
 			// even this double checking doesn't work -- when scrollView gets stuck, it stays stuck
 			// } else {
 		} else {

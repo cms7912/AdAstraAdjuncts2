@@ -11,6 +11,7 @@ import os.log
 import UniformTypeIdentifiers
 import SwiftUI
 import CoreData
+import AALogger
 
 public protocol DragonCard: Equatable, DragonCardParent {
   associatedtype ID: Equatable

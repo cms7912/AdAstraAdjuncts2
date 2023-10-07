@@ -33,6 +33,7 @@ let package = Package( // "The configuration of a Swift package."
     .library( name: "AdAstra_Multiplatform", targets: ["AdAstra_Multiplatform"] ),
     .library( name: "AdAstraBridgingByShim", targets: ["AdAstraBridgingByShim"] ),
     .library( name: "AdAstraBridgingNSExtensions", targets: ["AdAstraBridgingNSExtensions"] ),
+    .library( name: "AdAstra_KangarooScrollView", targets: ["AdAstra_KangarooScrollView"] ),
     
 //      .library( name: "AdAstraHotReloading", targets: ["AdAstraHotReloading"] ),
             ]
@@ -123,6 +124,14 @@ let package = Package( // "The configuration of a Swift package."
     
     
     , .target( name: "AdAstra_Addons", dependencies:[ "AdAstraExtensions", "AALogger", "AdAstraBridgingNSExtensions"] , path: "Sources/AdAstra_Addons" )
+    
+,
+  .target( name: "AdAstra_KangarooScrollView", dependencies:[
+    "AdAstraExtensions",
+    "AdAstra_Addons",
+  "AALogger",
+  // "AdAstraBridgingNSExtensions"
+  ], path: "Sources/AdAstra_KangarooScrollView" )
     
     , .target( name: "AdAstra_Multiplatform", dependencies:[ "AdAstraExtensions", ] , path: "Sources/AdAstra_Multiplatform" )
     , .target( name: "AdAstraBridgingByMask", dependencies:[ "AdAstraExtensions",] , path: "Sources/AdAstra_MultiplatformBridgingByMask" )

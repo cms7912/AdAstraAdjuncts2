@@ -11,6 +11,7 @@ import Combine
 import os.log
 import AdAstraExtensions
 import AdAstraBridgingByShim
+@_exported import AALogger
 
 #if DEBUG
 // internal var KSVDebugMode: Bool = true
