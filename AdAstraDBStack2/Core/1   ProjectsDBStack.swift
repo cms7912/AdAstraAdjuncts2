@@ -263,7 +263,7 @@ open class ProjectsDBStack: NSObject, ObservableObject // , ProjectsDBStackProto
     return context
   }()
 
-  weak var _rootBackgroundContext: NSManagedObjectContext?
+   var _rootBackgroundContext: NSManagedObjectContext?
   public lazy var rootBackgroundContext: NSManagedObjectContext = _rootBackgroundContext ?? { () -> NSManagedObjectContext in
     llog("buildCxt rootBackgroundContext")
     if DebugWithSingleContext { return container.viewContext }
@@ -284,7 +284,7 @@ open class ProjectsDBStack: NSObject, ObservableObject // , ProjectsDBStackProto
   // }
 
 
-  weak var _mainBackgroundContext: NSManagedObjectContext?
+   var _mainBackgroundContext: NSManagedObjectContext?
   public var mainBackgroundContext: NSManagedObjectContext {
     return _mainBackgroundContext ?? {
       llog("buildCxt mainBackgroundContext")
@@ -296,7 +296,7 @@ open class ProjectsDBStack: NSObject, ObservableObject // , ProjectsDBStackProto
     }()
   }
 
-  weak var _utilityBackgroundContext: NSManagedObjectContext?
+   var _utilityBackgroundContext: NSManagedObjectContext?
   public var utilityBackgroundContext: NSManagedObjectContext {
     return _utilityBackgroundContext ?? {
       llog("buildCxt utilityBackgroundContext")

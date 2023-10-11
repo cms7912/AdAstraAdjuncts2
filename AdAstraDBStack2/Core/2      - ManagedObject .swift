@@ -131,16 +131,14 @@ open class AdAstraNSManagedObject: NSManagedObject {
     return request
   }
 
-//  open func performOnBackgroundContext<AAMO: AnyObject>(
   open func performOnBackgroundContext(
-//    open func performOnBackgroundContext<AAMO>(
     whileWaiting: Bool = false,
     _ taskName: String, // = "Unknown task",
     _ qos: DispatchQoS.QoSClass = .utility,
 //    _ block: @escaping (NSManagedObjectContext, AAMO) -> Void
     _ block: @escaping (NSManagedObjectContext, Self) -> Void
   ) {
-    let id = objectID
+    let id = self.objectID
 
     guard let chosenContext = ProjectsDBStack.shared?.backgroundContext(for: qos) else {
 //      CrashDuringDebug🛑("Failed to have expected context")
@@ -150,7 +148,6 @@ open class AdAstraNSManagedObject: NSManagedObject {
 
     if whileWaiting.isOff {
       chosenContext.performWithoutWaiting(taskName) { context in
-//        guard let myself = context.object(with: id) as? AAMO else {
         guard let myself = context.object(with: id) as? Self else {
           assertionFailure(); return
         }

@@ -44,8 +44,8 @@ extension DispatchQoS.QoSClass {
 }
 
 public extension ProjectsDBStack {
-  var DebugWithSingleContext: Bool { false }
-  // var DebugWithSingleContext: Bool { true }
+  // var DebugWithSingleContext: Bool { false }
+  var DebugWithSingleContext: Bool { true }
 
   // static var _BackgroundContextDictionaryStore: [DispatchQoS.QoSClass : NSManagedObjectContext] = [:]
 
@@ -108,6 +108,7 @@ public extension ProjectsDBStack {
     // let newContext = container.newBackgroundContext()
     newContext.name = name // ?? "ProjectsDBStack_NewContextWithoutName"
     newContext.mergePolicy = CoreData.NSMergeByPropertyObjectTrumpMergePolicy
+    // newContext.mergePolicy = CoreData.NSMergeByPropertyStoreTrumpMergePolicy
     newContext.automaticallyMergesChangesFromParent = automaticallyMergesChangesFromParent
     // DispatchQueue.main.async { [self] in
     // self.rootBackgroundContext.performWithoutWaiting{ _ in
@@ -239,7 +240,7 @@ public extension CoreData.NSManagedObjectContext {
       }
       if self.automaticallyMergesChangesFromParent { self.saveContexts() }
       let endTime: DispatchTime = .now()
-      taskRecorder(taskName, startTime)
+      // taskRecorder(taskName, startTime)
     }
   }
 
@@ -284,7 +285,7 @@ public extension CoreData.NSManagedObjectContext {
         throw error
       }
     }
-    taskRecorder(taskName, startTime)
+    // taskRecorder(taskName, startTime)
   }
 
 
@@ -302,13 +303,16 @@ public extension CoreData.NSManagedObjectContext {
         WorkBlock(self)
       }
       if self.automaticallyMergesChangesFromParent { self.saveContexts() }
-      self.taskRecorder(taskName, startTime)
+      // self.taskRecorder(taskName, startTime)
     }
   }
 
 
   /// 🌟 Saves context if changes, then saves parent contexts up the lineage
   func saveContexts() {
+    try? _saveContexts()
+  }
+  func _saveContexts() throws {
     guard hasChanges else { return }
 
     perform {
@@ -316,8 +320,14 @@ public extension CoreData.NSManagedObjectContext {
       guard let self = self else { return }
       // [self] in
 
-      try? self.save()
-      self.parent?.saveContexts()
+      do {
+        try self.save()
+        llog("local save successful")
+        try self.parent?._saveContexts()
+        llog("parent save successful")
+      } catch {
+        llog("error.localizedDescription: \(error.localizedDescription)")
+      }
     }
   }
 
@@ -330,8 +340,14 @@ public extension CoreData.NSManagedObjectContext {
       guard let self = self else { return }
       // [self] in
 
-      try? self.save()
-      self.parent?.saveContextsWhileWaiting()
+      do {
+        try self.save()
+        llog("local save successful")
+        try self.parent?._saveContexts()
+        llog("parent save successful")
+      } catch {
+        llog("error.localizedDescription: \(error.localizedDescription)")
+      }
     }
   }
 

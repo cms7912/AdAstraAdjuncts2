@@ -46,7 +46,7 @@ public class DebugBordersViewModel: ObservableObject {
     }
   }
 
-  public static var ShowListToggle: Bool = false
+  public static var ShowListToggle: Bool = true
 
   @Published public var bordersList: [DebugBorderRecord] = .empty
   // var bordersListNamesUsed: [String] = .empty
@@ -77,7 +77,6 @@ public struct DebugBordersTelemetry: View {
   @EnvironmentObject var debugBordersVM: DebugBordersViewModel
   // @EnvironmentObject var debug: HighlightDebug
   public var body: some View {
-    // if HighlightDebug.feature.showDebugBordersTelemetry {
     if DebugBordersTelemetry.ShowListRendered {
       ScrollView { VStack {
         Text("=Debug Borders=")
