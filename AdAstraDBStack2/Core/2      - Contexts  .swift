@@ -310,9 +310,6 @@ public extension CoreData.NSManagedObjectContext {
 
   /// 🌟 Saves context if changes, then saves parent contexts up the lineage
   func saveContexts() {
-    try? _saveContexts()
-  }
-  func _saveContexts() throws {
     guard hasChanges else { return }
 
     perform {
@@ -322,12 +319,11 @@ public extension CoreData.NSManagedObjectContext {
 
       do {
         try self.save()
-        llog("local save successful")
-        try self.parent?._saveContexts()
-        llog("parent save successful")
       } catch {
         llog("error.localizedDescription: \(error.localizedDescription)")
+        assertionFailure()
       }
+         self.parent?.saveContexts()
     }
   }
 
@@ -342,12 +338,11 @@ public extension CoreData.NSManagedObjectContext {
 
       do {
         try self.save()
-        llog("local save successful")
-        try self.parent?._saveContexts()
-        llog("parent save successful")
       } catch {
         llog("error.localizedDescription: \(error.localizedDescription)")
+        assertionFailure()
       }
+        self.parent?.saveContexts()
     }
   }
 
