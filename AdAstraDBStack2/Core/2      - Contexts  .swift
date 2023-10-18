@@ -44,8 +44,8 @@ extension DispatchQoS.QoSClass {
 }
 
 public extension ProjectsDBStack {
-  // var DebugWithSingleContext: Bool { false }
-  var DebugWithSingleContext: Bool { true }
+  var DebugWithSingleContext: Bool { false }
+  // var DebugWithSingleContext: Bool { true }
 
   // static var _BackgroundContextDictionaryStore: [DispatchQoS.QoSClass : NSManagedObjectContext] = [:]
 
