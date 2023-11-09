@@ -162,10 +162,10 @@ public extension NSFont {
 
 
 public extension NSAlert {
-  convenience init(title: String, message: String, preferredStyle _: NSAlert.UIAlertStyle) {
+  convenience init(cardTitle: String, message: String, preferredStyle _: NSAlert.UIAlertStyle) {
     NSAlert.buttonActionHandlers.removeAll()
     self.init()
-    messageText = title
+    messageText = cardTitle
     informativeText = message
     alertStyle = .warning
     addButton(withTitle: "Exit")
@@ -232,7 +232,7 @@ public extension NSAlert {
   // 	}
 
   func addAction(_ action: NSAppAlertAction) {
-    addButton(withTitle: action.title)
+    addButton(withTitle: action.cardTitle)
     alertStyle = { () -> NSAlert.Style in
       switch action.style {
         case .default:
@@ -260,12 +260,12 @@ public class NSAppAlertAction {
     case destructive
   }
 
-  var title: String
+  var cardTitle: String
   var style: NSAppAlertAction.Style
   var handler: (Any?) -> Void
 
-  public init(title: String, style: NSAppAlertAction.Style, handler: @escaping (Any?) -> Void) {
-    self.title = title
+  public init(cardTitle: String, style: NSAppAlertAction.Style, handler: @escaping (Any?) -> Void) {
+    self.cardTitle = cardTitle
     self.style = style
     self.handler = handler
   }

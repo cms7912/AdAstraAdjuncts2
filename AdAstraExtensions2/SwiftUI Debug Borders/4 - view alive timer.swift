@@ -16,37 +16,46 @@ struct DebugAliveTimer: ViewModifier {
   //  @Environment(\.managedObjectContext) var viewContext
   public init() { }
   
-  @State private var timeElapsed = 0
-  @State private var timeDisplayed: String = "0 seconds"
-  let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
   
   @ViewBuilder
   func body(content: Content) -> some View {
 #if DEBUG
       content
         .overlay(alignment: .top){
-          Text("\(timeDisplayed)")
-            .font(.caption2)
-            .foregroundColor(.primary)
-            .padding(.horizontal, 20)
-            .padding(.vertical, 5)
-            .background(.background.opacity(0.75))
-            .clipShape(Capsule())
-        }
-        .onReceive(timer) { _ in
-          timeElapsed += 1
-          if timeElapsed < 60 {
-            timeDisplayed = "\(timeElapsed) s"
-          } else {
-            let minutesElapsed = timeElapsed.quotientAndRemainder(dividingBy: 60).quotient
-            timeDisplayed = "\(minutesElapsed) m"
-          }
+          DebugTimerCapsule()
         }
 #else
     content
 #endif
   }
+}
+
+public struct DebugTimerCapsule: View {
+  let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+  @State private var timeElapsed = 0
+  @State private var timeDisplayed: String = "0 seconds"
+  public init() { }
   
+  public var body: some View {
+    Text("\(timeDisplayed)")
+      .font(.caption2)
+      .foregroundColor(.primary)
+      .padding(.horizontal, 20)
+      .padding(.vertical, 5)
+      .background(.background.opacity(0.75))
+      .clipShape(Capsule())
+    
+      .onReceive(timer) { _ in
+        timeElapsed += 1
+        if timeElapsed < 60 {
+          timeDisplayed = "\(timeElapsed) s"
+        } else {
+          let minutesElapsed = timeElapsed.quotientAndRemainder(dividingBy: 60).quotient
+          timeDisplayed = "\(minutesElapsed) m"
+        }
+      }
+    
+  }
 }
 
 

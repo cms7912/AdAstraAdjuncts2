@@ -72,10 +72,10 @@ Encountered unexpected condition. Data has been saved. If this continues please 
 
 		// Present alert to user
 		#if os(iOS)
-		let alertController = UIAlertController(title: title, message: fullMessage
+		let alertController = UIAlertController(cardTitle: cardTitle, message: fullMessage
 												 , preferredStyle: .alert)
 		alertController.addAction(
-			UIAlertAction(title: buttonText, style: .default, handler: {_ in fatalError("\(message)") })
+			UIAlertAction(cardTitle: buttonText, style: .default, handler: {_ in fatalError("\(message)") })
 		)
 
 		let rootViewController = UIApplication.shared.windows.first?.rootViewController
@@ -83,7 +83,7 @@ Encountered unexpected condition. Data has been saved. If this continues please 
 
 		#else
 		let alert = NSAlert()
-		alert.messageText = title
+		alert.messageText = cardTitle
 		alert.informativeText = fullMessage
 		alert.alertStyle = NSAlert.Style.warning
 		alert.addButton(withTitle: buttonText)
@@ -165,12 +165,12 @@ public func AlertDuringDebug📣(
 	if AlertDuringDebug_IgnoredAlerts.contains(metadata) { return }
 
 	// Present alert
-	let alertController = UIAlertController(title: "Debug Reporting", message: message, preferredStyle: .alert)
+	let alertController = UIAlertController(cardTitle: "Debug Reporting", message: message, preferredStyle: .alert)
 	alertController.addAction(
-		UIAlertAction(title: "OK", style: .default, handler: {_ in }) )
+		UIAlertAction(cardTitle: "OK", style: .default, handler: {_ in }) )
 
 	alertController.addAction(
-		UIAlertAction(title: "Skip in future", style: .destructive, handler: {_ in
+		UIAlertAction(cardTitle: "Skip in future", style: .destructive, handler: {_ in
 			AlertDuringDebug_IgnoredAlerts.append(metadata)
 		}) )
 

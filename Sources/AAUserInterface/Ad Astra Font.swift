@@ -15,7 +15,6 @@ public protocol AdAstraFont {
 public extension AdAstraFont {
   var aaMaxHeightForFont: CGFloat {
     #if DEBUG
-    // temp
     assert(ascender > capHeight)
     #endif
 		return (ascender + descender)

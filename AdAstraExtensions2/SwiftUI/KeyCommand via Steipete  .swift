@@ -67,13 +67,13 @@ private struct KeyCommandStyle: PrimitiveButtonStyle {
 @available(iOS 13.0, *)
 extension View {
     /// Register a key command for the current button, invoking the button action when triggered.
-    func keyCommand(_ key: String, modifiers: UIKeyModifierFlags = .command, title: String = "") -> some View {
+    func keyCommand(_ key: String, modifiers: UIKeyModifierFlags = .command, cardTitle: String = "") -> some View {
         buttonStyle(KeyCommandStyle(commandPair: KeyCommandPair(input: key, modifiers: modifiers)))
     }
 
     /// Register a key command for the current view
-    public func onKeyCommand(_ key: String, modifiers: UIKeyModifierFlags = .command, title: String = "", action: @escaping () -> Void) -> some View {
-        keyCommand(keyPair: KeyCommandPair(input: key, modifiers: modifiers, title: title), action: action)
+    public func onKeyCommand(_ key: String, modifiers: UIKeyModifierFlags = .command, cardTitle: String = "", action: @escaping () -> Void) -> some View {
+        keyCommand(keyPair: KeyCommandPair(input: key, modifiers: modifiers, cardTitle: cardTitle), action: action)
     }
 
     fileprivate func keyCommand(keyPair: KeyCommandPair, action: @escaping () -> Void) -> some View {
@@ -103,7 +103,7 @@ private class KeyCommandRegistrator: ObservableObject {
     let keyPublisher = PassthroughSubject<KeyCommandPair, Never>()
 
     func register(_ commandPair: KeyCommandPair) {
-        let command = UIKeyCommand(title: commandPair.title ?? "",
+        let command = UIKeyCommand(cardTitle: commandPair.cardTitle ?? "",
                                    action: NSSelectorFromString("performKeyCommand:"),
                                    input: commandPair.input,
                                    modifierFlags: commandPair.modifiers)
@@ -116,7 +116,7 @@ private class KeyCommandRegistrator: ObservableObject {
 private struct KeyCommandPair: Equatable {
     var input: String
     var modifiers: UIKeyModifierFlags
-    var title: String?
+    var cardTitle: String?
 
     static func == (lhs: KeyCommandPair, rhs: KeyCommandPair) -> Bool {
         return lhs.input == rhs.input && lhs.modifiers == rhs.modifiers

@@ -40,13 +40,13 @@ public class DebugBordersViewModel: ObservableObject {
   public static var DebugBordersOn: Bool = false
   #endif
 
-  public static var AllBordersDefaultHidden: Bool = true {
+  public static var AllBordersDefaultHidden: Bool = false {
     willSet {
       Self.shared.objectWillChange.send()
     }
   }
 
-  public static var ShowListToggle: Bool = true
+  public static var ShowListToggle: Bool = false
 
   @Published public var bordersList: [DebugBorderRecord] = .empty
   // var bordersListNamesUsed: [String] = .empty

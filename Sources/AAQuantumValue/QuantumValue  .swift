@@ -16,18 +16,18 @@ public protocol Quantumable {
   init(_: QuantumValue) throws
 }; extension Quantumable { }
 
-#if Disabled
-public extension Quantumable where Self == JSONData {
+// #if Disabled
+public extension Quantumable where Self: JSONCodable {
   init(_ qv: QuantumValue) throws {
     // self = try qv.to(JSONData.self).jsonTo(Self.self)
     self = try qv.asData.jsonTo(Self.self)
   }
 
-  var asQuantumValue: QuantumValue {
-    data.asQuantumValue
-  }
+  var asQuantumValue: QuantumValue { get throws {
+    try asJSON.asQuantumValue
+  } }
 }
-#endif
+// #endif
 
 public enum QuantumValue: JSONCodable, Equatable, Hashable {
   case int(Int)

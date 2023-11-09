@@ -14,7 +14,7 @@ public var JSONEncoder = Foundation.JSONEncoder()
 public var JSONDecoder = Foundation.JSONDecoder()
 
 
-public struct JSONData: Codable, Equatable {
+public struct JSONData: Codable, Hashable, Equatable {
   public static var Empty: JSONData = JSONData(Data())
   public static var EmptyAndAssert: JSONData {
     assertionFailure()

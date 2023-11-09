@@ -23,9 +23,10 @@ open class AdAstraNSManagedObject: NSManagedObject {
     fatalError()
   }
 
-  public convenience init(into context: NSManagedObjectContext) {
-    let name = String(describing: type(of: self))
-    let entity = NSEntityDescription.entity(forEntityName: name, in: context)!
+  public convenience init(into context: NSManagedObjectContext?) {
+    // let name = String(describing: type(of: self))
+    // let entity = NSEntityDescription.entity(forEntityName: name, in: context)!
+    let entity = Self.entity()
     self.init(entity: entity, insertInto: context)
   }
 
@@ -43,6 +44,7 @@ open class AdAstraNSManagedObject: NSManagedObject {
   open var context: NSManagedObjectContext {
     setContext()
     #if DEBUG
+    // if ProcessInfo.runningInPreviewCanvas { return ProjectsDBStack.shared!.viewContext }
     guard managedObjectContext.isNotNil else {
       fatalError("Unexpectedly self.managedObjectContext is nil: \(debugDescription)") }
     guard managedObjectContext == _contextStore else {
@@ -57,7 +59,9 @@ open class AdAstraNSManagedObject: NSManagedObject {
   }
 
   func setContext() {
-    if _contextStore.isNotNil { return }
+    if _contextStore.isNotNil 
+        // || ProcessInfo.runningInPreviewCanvas
+    { return }
     guard let cxt = managedObjectContext as? NSManagedObjectContext else {
       llog("missing object context for \(debugDescription)")
 //      crashAfterUserAlert("Unexpected missing object context")
