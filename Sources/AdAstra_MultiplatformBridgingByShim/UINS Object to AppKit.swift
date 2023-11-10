@@ -43,6 +43,7 @@ public typealias UINSPanGestureRecognizer = NSPanGestureRecognizer
 
 public typealias UINSUserInterfaceLayoutOrientation = NSUserInterfaceLayoutOrientation
 public typealias UINSLayoutPriority = NSLayoutConstraint.Priority
+public typealias UINSLayoutGuide = NSLayoutGuide
 
 public typealias UINSAlertController = NSAlert
 //public typealias UINSAlertAction = NSAppAlertAction // bridge below for NS UIAlertAction
@@ -185,6 +186,63 @@ extension NSView {
       self.alphaValue = newValue
     }
   }
+  
+  public class func animate(withDuration: TimeInterval, closure: () -> Void) {
+    NSAnimationContext.runAnimationGroup({ context in
+      context.duration = 0.25
+      // self.layoutSubtreeIfNeeded(self)
+      closure()
+    }, completionHandler: nil)
+  }
+  public class func animate(withDuration: TimeInterval,
+                            delay: Double,
+                            usingSpringWithDamping: Double,
+                            initialSpringVelocity: Double
+                            , closure: () -> Void) {
+    NSAnimationContext.runAnimationGroup({ context in
+      context.duration = 0.25
+      // self.layoutSubtreeIfNeeded(self)
+      closure()
+    }, completionHandler: nil)
+  }
+
+  public var transform: CGAffineTransform {
+    get {
+      self.layer!.affineTransform()
+    }
+    set {
+      self.layer?.setAffineTransform(newValue)
+    }
+  }
+  
+  
+  
+  public enum ContentMode {
+    case scaleAspectFit
+  }
+  var contentMode: ContentMode? {
+    get {
+      switch self.imageScaling {
+        case .scaleProportionallyUpOrDown:
+          return .scaleAspectFit
+        default:
+          assertionFailure()
+          return .scaleAspectFit
+      }
+    }
+    set {
+      switch newValue {
+        case .scaleAspectFit:
+          self.imageScaling = .scaleProportionallyUpOrDown
+        default:
+          assertionFailure()
+          self.imageScaling = .scaleProportionallyUpOrDown
+      }
+    }
+  }
+  
+
+  
 }
 
 public extension NSAppearance {
@@ -217,8 +275,12 @@ extension NSColor {
     NSAppearance.isLightMode
   }
 
-  static var isDarkMode: Bool {
+  public static var isDarkMode: Bool {
     NSAppearance.isDarkMode
+  }
+  
+  public static var label: NSColor {
+    self.labelColor
   }
 }
 
@@ -231,6 +293,16 @@ extension NSFont {
   }
 }
 
+public extension UINSImageView {
+  var tintColor: NSColor? {
+    get {
+      self.contentTintColor
+    }
+    set {
+      self.contentTintColor = newValue
+    }
+  }
+}
 
 open class UINSTextView: NSTextView {
   override public init(frame: NSRect, textContainer: NSTextContainer?) {
@@ -298,15 +370,16 @@ open class UINSTextView: NSTextView {
 
 public extension UINSTextView{
   static var uinsTextDidChangeNotification: NSNotification.Name { Self.didChangeNotification }
-
+  
   var uinsTextStorage: NSTextStorage? {
     return textStorage
   }
-
+  
   func uinsShouldChangeText(in range: NSRange, replacementText: String?) -> Bool {
     shouldChangeText(in: range, replacementString: replacementText)
   }
-  
+}
+public extension NSTextView{
   var textAlignment: NSTextAlignment {
     get {
       self.alignment
@@ -315,17 +388,19 @@ public extension UINSTextView{
       self.alignment = newValue
     }
   }
-
+  
   var contentMode: ContentMode {
     get {
-     assertionFailure()
+      assertionFailure()
       return .fit
     }
     set {
       
     }
   }
-  
+}
+
+public extension NSTextView {
   var text: String {
     get {
       return self.string
