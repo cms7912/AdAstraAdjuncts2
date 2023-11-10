@@ -103,7 +103,7 @@ private class KeyCommandRegistrator: ObservableObject {
     let keyPublisher = PassthroughSubject<KeyCommandPair, Never>()
 
     func register(_ commandPair: KeyCommandPair) {
-        let command = UIKeyCommand(cardTitle: commandPair.cardTitle ?? "",
+        let command = UIKeyCommand(title: commandPair.cardTitle ?? "",
                                    action: NSSelectorFromString("performKeyCommand:"),
                                    input: commandPair.input,
                                    modifierFlags: commandPair.modifiers)

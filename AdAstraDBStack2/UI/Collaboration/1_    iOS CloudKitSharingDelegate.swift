@@ -94,7 +94,7 @@ projectListing is in \({  () -> String in
 
 							// Update ckShare's presented title
 							projectListing.managedObjectContext?.performAndWait {
-								actualShare[CKShare.SystemFieldKey.cardTitle] = projectListing.presentableName
+								actualShare[CKShare.SystemFieldKey.title] = projectListing.presentableName
 							}
 
 							if let sharedStore = ProjectsDBStack.shared?.sharedPersistentStore {

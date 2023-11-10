@@ -8,7 +8,7 @@
 import Foundation
 
 #if os(macOS)
-import AppKit
+@_exported import AppKit
 //import AdAstraBridgingNSExtensions
 
 public typealias UINSView = NSView
@@ -18,11 +18,13 @@ public typealias UINSImage = NSImage
 public typealias UINSImageView = NSImageView
 public typealias UINSLabel = NSTextView
 public typealias UINSTextField = NSTextField
+public typealias UINSTextFieldDelegate = NSTextFieldDelegate
 public typealias UINSPasteboard = NSPasteboard
 public typealias UINSBezierPath = NSBezierPath
 public typealias UINSScrollView = NSScrollView
 public typealias UINSButton = NSButton
 public typealias UINSStackView = NSStackView
+// public typealias UINSBarButtonItem =
 
 public typealias UINSScreen = NSScreen
 public typealias UINSWindow = NSWindow
@@ -38,7 +40,6 @@ public typealias UINSTapGestureRecognizer = NSClickGestureRecognizer
 public typealias UINSLongPressGestureRecognizer = NSPressGestureRecognizer
 public typealias UINSPanGestureRecognizer = NSPanGestureRecognizer
 
-// public typealias UINSKeyCommand = NSLimitedKeyCommand
 
 public typealias UINSUserInterfaceLayoutOrientation = NSUserInterfaceLayoutOrientation
 public typealias UINSLayoutPriority = NSLayoutConstraint.Priority
@@ -51,6 +52,14 @@ public typealias UINSApplicationDelegate = NSApplicationDelegate
 // public typealias UINSViewController = NSViewController
 
 //public typealias UINSDocumentPickerDelegate = NSDocumentPickerDelegate
+
+public typealias UINSCollectionView = NSCollectionView
+public typealias UINSCollectionViewDelegate = NSCollectionViewDelegate
+public typealias UINSCollectionViewDataSource = NSCollectionViewDataSource
+public typealias UINSCollectionViewFlowLayout = NSCollectionViewFlowLayout
+public typealias UINSCollectionReusableView = NSCollectionViewItem
+public typealias UINSCollectionViewCell = NSCollectionViewItem
+
 
 public typealias UINSEvent = NSEvent
 
@@ -76,12 +85,17 @@ public extension NSApplicationDelegate { }
 
 public extension NSScreen {
   var bounds: NSRect { frame }
+ static var aaMain: NSScreen? { NSScreen.main }
 }
 
 open class UINSViewController: NSViewController {
   func viewDidAppear(_: Bool) {
     viewDidAppear()
   }
+  open func viewDidLayoutSubviews() {
+    self.viewDidLayout()
+  }
+
 }
 
 extension NSView {
@@ -89,7 +103,6 @@ extension NSView {
   open func hitTest(_ point: CGPoint, with _: UINSEvent? = nil) -> UINSView? {
     hitTest(point)
   }
-
 
   // public var layer: CALayer {
   //   get {
@@ -109,13 +122,13 @@ extension NSView {
     viewDidMoveToSuperview()
   }
 
-  open func uinsSizeToFit() {
+  public func uinsSizeToFit() {
     frame.size = fittingSize
   }
 
   open var uinsFittingSize: CGSize { self.fittingSize }
 
-  open func isDarkMode() -> Bool {
+  public func isDarkMode() -> Bool {
     // return self.effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
     NSAppearance.isDarkMode
   }
@@ -125,7 +138,7 @@ extension NSView {
     layout()
   }
 
-  open func setNeedsLayout() {
+  public func setNeedsLayout() {
     needsLayout = true
   }
 
@@ -134,7 +147,7 @@ extension NSView {
     if needsLayout { layoutSubviews() }
   }
 
-  open var backgroundColor: NSColor? {
+  public var backgroundColor: NSColor? {
     get { self.wantsLayer = true; return NSColor(cgColor: self.layer?.backgroundColor ?? CGColor.clear) }
     set { self.wantsLayer = true; self.layer?.backgroundColor = newValue?.cgColor }
   }
@@ -148,17 +161,30 @@ extension NSView {
   //   set { self.wantsLayer = true; self.layer?.masksToBounds = newValue }
   // }
 
-  open var uinsClipToBounds: Bool {
+  public var uinsClipToBounds: Bool {
     get { self.wantsLayer = true; return self.layer!.masksToBounds }
     set { self.wantsLayer = true; self.layer?.masksToBounds = newValue }
   }
 
-  open var uinsClipsToBounds: Bool {
+  public var uinsClipsToBounds: Bool {
     get { wantsLayer = true; return layer!.masksToBounds }
     set { wantsLayer = true; layer?.masksToBounds = newValue }
   }
 
   public var uinsLayer: CALayer? { wantsLayer = true; return layer }
+  
+  open func traitCollectionDidChange(_ previousTraitCollection: Any?) {
+    self.updateLayer()
+  }
+  
+  
+  public var alpha: CGFloat {
+    get {
+      self.alphaValue
+    } set {
+      self.alphaValue = newValue
+    }
+  }
 }
 
 public extension NSAppearance {
@@ -280,13 +306,50 @@ public extension UINSTextView{
   func uinsShouldChangeText(in range: NSRange, replacementText: String?) -> Bool {
     shouldChangeText(in: range, replacementString: replacementText)
   }
+  
+  var textAlignment: NSTextAlignment {
+    get {
+      self.alignment
+    }
+    set {
+      self.alignment = newValue
+    }
+  }
+
+  var contentMode: ContentMode {
+    get {
+     assertionFailure()
+      return .fit
+    }
+    set {
+      
+    }
+  }
+  
+  var text: String {
+    get {
+      return self.string
+    }
+    set {
+      self.string = newValue
+    }
+  }
 }
 
 
 public extension NSImage {
   convenience init(systemName name: String) {
-    self.init(imageLiteralResourceName: name)
+    self.init(systemName: name)
   }
+  
+  // convenience init(systemName name: String,
+  //                  withConfiguration config: NSImage.SymbolConfiguration) {
+  //   self.init(systemName: name)
+  //   if let newSelf = self.withSymbolConfiguration(config) {
+  //     
+  //   }
+  // }
+  
 }
 
 
@@ -325,6 +388,15 @@ public extension NSImage {
     self.cgImage(forProposedRect: nil, context: nil, hints: nil)
     // https://stackoverflow.com/questions/24595908/swift-nsimage-to-cgimage
   }
+}
+
+extension NSCollectionViewDiffableDataSource {
+  // public func collectionView(_ collectionView: UINSCollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UINSCollectionReusableView {
+  //   self.collectionView(collectionView,
+  //                       viewForSupplementaryElementOfKind: kind,
+  //                       at: indexPath)
+  // }
+  
 }
 
 
@@ -507,6 +579,9 @@ public extension NSEntityDescription {
     attributesByName
   }
 }
+
+
+
 
 
 #endif

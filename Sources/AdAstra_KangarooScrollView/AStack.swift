@@ -12,7 +12,7 @@ import SwiftUI
 // Axis Stack
 // provides for setting horizontal/vertical stack contextually
 
-@available(macOS 13, *)
+@available(macOS 13, iOS 16, *)
 public struct DynamicStack<Content: View>: View {
   public init(direction: Axis.Set,
               alignment: Alignment =  Alignment(horizontal: .center, vertical: .center) ,
@@ -36,7 +36,7 @@ public struct DynamicStack<Content: View>: View {
 }
 
 
-@available(macOS 13, *)
+@available(macOS 13, iOS 16, *)
 private extension DynamicStack {
   var currentLayout: AnyLayout {
     switch direction {

@@ -7,7 +7,7 @@
 
 import Foundation
 #if os(iOS)
-import UIKit
+@_exported import UIKit
 
 
 public typealias UINSView = UIView
@@ -18,6 +18,7 @@ public typealias UINSImageView = UIImageView
 public typealias UINSLabel = UILabel
 // public typealias UINSTextView = UITextView
 public typealias UINSTextField = UITextField
+public typealias UINSTextFieldDelegate = UITextFieldDelegate
 public typealias UINSPasteboard = UIPasteboard
 public typealias UINSBezierPath = UIBezierPath
 public typealias UINSScrollView = UIScrollView
@@ -42,6 +43,7 @@ public typealias UINSKeyCommand = UIKeyCommand
 
 public typealias UINSUserInterfaceLayoutOrientation = NSLayoutConstraint.Axis
 public typealias UINSLayoutPriority = UILayoutPriority
+public typealias UINSLayoutGuide = UILayoutGuide
 
 public typealias UINSAlertController = UIAlertController
 public typealias UINSAlertAction = UIAlertAction
@@ -52,9 +54,22 @@ public typealias UINSApplicationDelegate = UIApplicationDelegate
 
 public typealias UINSDocumentPickerDelegate = UIDocumentPickerDelegate
 
+public typealias UINSCollectionView = UICollectionView
+public typealias UINSCollectionViewDelegate = UICollectionViewDelegate
+public typealias UINSCollectionViewDataSource = UICollectionViewDataSource
+public typealias UINSCollectionViewFlowLayout = UICollectionViewFlowLayout
+public typealias UINSCollectionReusableView = UICollectionReusableView
+public typealias UINSCollectionViewCell = UICollectionViewCell
+
+
 public typealias UINSEvent = UIEvent
 
 extension UINSApplicationDelegate { }
+
+public extension UIScreen {
+ static var aaMain: UIScreen? { UIScreen.main }
+}
+
 
 extension UIView {
   public var wantsLayer: Bool { get{ return true } set{ } }
