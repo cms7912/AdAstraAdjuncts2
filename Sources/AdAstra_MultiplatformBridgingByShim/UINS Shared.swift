@@ -15,6 +15,56 @@ import SwiftUI
 
 // import AdAstraExtensions
 
+
+public extension UINSLayoutGuide {
+  func addSubviewWithAnchorConstraints(_ subview: UIView,
+                                       edges: [Edge] = Edge.allCases,
+                                       centering: [Axis] = [],
+                                       priority: Float = 1000)
+  {
+    let myGuide = self
+
+    NSLayoutConstraint.activate( [
+      NSLayoutConstraint(
+        item: myGuide,
+        attribute: .leading,
+        relatedBy: .equal,
+        toItem: subview,
+        attribute: .leading,
+        multiplier: 1,
+        constant: 1
+      ),
+      NSLayoutConstraint(
+        item: myGuide,
+        attribute: .trailing,
+        relatedBy: .equal,
+        toItem: subview,
+        attribute: .trailing,
+        multiplier: 1,
+        constant: 1
+      ),
+      NSLayoutConstraint(
+        item: myGuide,
+        attribute: .top,
+        relatedBy: .equal,
+        toItem: subview,
+        attribute: .top,
+        multiplier: 1,
+        constant: 1
+      ),
+      NSLayoutConstraint(
+        item: myGuide,
+        attribute: .bottom,
+        relatedBy: .equal,
+        toItem: subview,
+        attribute: .bottom,
+        multiplier: 1,
+        constant: 1
+      ),
+    ] )
+    
+  }
+}
 public extension UINSView {
   func addSubviewWithAnchorConstraints(_ subview: UINSView,
                                        edges: [Edge] = Edge.allCases,
