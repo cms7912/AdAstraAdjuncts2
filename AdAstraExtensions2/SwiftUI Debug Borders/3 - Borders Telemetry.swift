@@ -199,7 +199,8 @@ public extension View {
   func injectDebugBordersAndTelemetry() -> some View {
     Group{
       if DebugBordersViewModel.DebugBordersOn {
-        self.modifier(DebugBordersAndTelemetry())
+        self
+          .modifier(DebugBordersAndTelemetry())
       } else {
         self
       }
