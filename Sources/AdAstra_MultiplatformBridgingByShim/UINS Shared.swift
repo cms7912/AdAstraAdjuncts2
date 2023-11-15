@@ -17,7 +17,7 @@ import SwiftUI
 
 
 public extension UINSLayoutGuide {
-  func addSubviewWithAnchorConstraints(_ subview: UIView,
+  func addSubviewWithAnchorConstraints(_ subview: UINSView,
                                        edges: [Edge] = Edge.allCases,
                                        centering: [Axis] = [],
                                        priority: Float = 1000)
@@ -238,3 +238,116 @@ public extension UINSApplication {
 
 #endif 
 
+
+#if os(iOS)
+
+extension UITextInput {
+  var selectedRange: NSRange? {
+    guard let range = selectedTextRange else { return nil }
+    let location = offset(from: beginningOfDocument, to: range.start)
+    let length = offset(from: range.start, to: range.end)
+    return NSRange(location: location, length: length)
+    // https://gist.github.com/gkhackers/d511b0bd070960191da5390a4e028d65
+  }
+
+  func nsRange(uiRange: UITextRange) -> NSRange {
+    let location = offset(from: beginningOfDocument, to: uiRange.start)
+    let length = offset(from: uiRange.start, to: uiRange.end)
+    return NSRange(location: location, length: length)
+  }
+
+
+  func uiTextRange(nsRange: NSRange) -> UITextRange? {
+    let location = nsRange.location
+    let length = nsRange.length
+
+    guard let startPosition = position(from: beginningOfDocument, offset: location),
+          let endPosition = position(from: beginningOfDocument, offset: location + length) else { return nil }
+    return textRange(from: startPosition, to: endPosition)
+  }
+}
+
+public extension NSTextRange {
+  convenience init?(_ range: NSRange, provider: NSTextElementProvider) {
+    let docLocation = provider.documentRange.location
+
+    guard let start = provider.location?(docLocation, offsetBy: range.location) else {
+      return nil
+    }
+
+    guard let end = provider.location?(start, offsetBy: range.length) else {
+      return nil
+    }
+
+    self.init(location: start, end: end)
+  }
+  // https://github.com/ChimeHQ/Rearrange/blob/b83fb77f2202256a4439aa148134d3b28e3f00d2/Sources/Rearrange/NSTextRange%2BNSRange.swift
+}
+
+public extension NSTextElementProvider {
+  func nsTextRange(from range: NSRange) -> NSTextRange? {
+    let provider = self
+    let docLocation = provider.documentRange.location
+
+    guard let start = provider.location?(docLocation, offsetBy: range.location) else {
+      return nil
+    }
+
+    guard let end = provider.location?(start, offsetBy: range.length) else {
+      return nil
+    }
+
+    return NSTextRange(location: start, end: end)
+  }
+}
+#elseif os(macOS)
+import AppKit
+public extension NSTextView {
+  func nsTextRange(from range: NSRange) -> NSTextRange? {
+    
+    guard let docLocation = self.textLayoutManager?.documentRange.location else { return nil }
+    
+    guard let start = self.textLayoutManager?.location(docLocation, offsetBy: range.location) else {
+      return nil
+    }
+
+    guard let end = self.textLayoutManager?.location(start, offsetBy: range.length) else {
+      return nil
+    }
+
+    return NSTextRange(location: start, end: end)
+  }
+}
+#endif
+
+public extension UINSTextView {
+  public func uinsCurrentCursorRect() -> CGRect? {
+#if os(iOS)
+    guard let range = self.selectedTextRange else { return nil }
+    let cursorRect = textView.caretRect(for: range.start)
+    return cursorRect
+#elseif os(macOS)
+    
+    var cursorRect: CGRect?
+    
+    let nsr = self.selectedRange()
+    if let textRange = self.nsTextRange(from: nsr) {
+      var loc = textRange.location
+      
+      textLayoutManager?.enumerateTextSegments(
+        in: textRange,
+        type: .standard,
+        options: .upstreamAffinity) {
+          _,
+          segmentFrame,
+          baselinePosition,
+          _ in
+          // use segmentFrame and baselinePosition to calculate insertion point location in NSTextContainer
+          cursorRect = segmentFrame
+          return false
+        }
+    }
+    return cursorRect
+#endif
+  }
+}

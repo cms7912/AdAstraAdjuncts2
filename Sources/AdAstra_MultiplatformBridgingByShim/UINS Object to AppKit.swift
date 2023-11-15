@@ -216,7 +216,7 @@ extension NSView {
   }
   
   
-  
+  #if Disabled
   public enum ContentMode {
     case scaleAspectFit
   }
@@ -240,7 +240,7 @@ extension NSView {
       }
     }
   }
-  
+  #endif
 
   
 }
@@ -279,9 +279,6 @@ extension NSColor {
     NSAppearance.isDarkMode
   }
   
-  public static var label: NSColor {
-    self.labelColor
-  }
 }
 
 extension NSFont {
@@ -354,6 +351,10 @@ open class UINSTextView: NSTextView {
   public var isFocused: Bool {
     window?.firstResponder == self
   }
+  
+  public var selectedTextRange: NSRange? {
+    self.selectedRange()
+  }
 
   // public var attributedString: AttributedString? {
   //   get {
@@ -389,15 +390,15 @@ public extension NSTextView{
     }
   }
   
-  var contentMode: ContentMode {
-    get {
-      assertionFailure()
-      return .fit
-    }
-    set {
-      
-    }
-  }
+  // var contentMode: ContentMode {
+  //   get {
+  //     assertionFailure()
+  //     return .scaleAspectFit
+  //   }
+  //   set {
+  //     
+  //   }
+  // }
 }
 
 public extension NSTextView {
