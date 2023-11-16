@@ -321,7 +321,7 @@ public extension NSTextView {
 #endif
 
 public extension UINSTextView {
-  public func uinsCurrentCursorRect() -> CGRect? {
+  func uinsCurrentCursorRect() -> CGRect? {
 #if os(iOS)
     guard let range = self.selectedTextRange else { return nil }
     let cursorRect = textView.caretRect(for: range.start)
@@ -332,7 +332,7 @@ public extension UINSTextView {
     
     let nsr = self.selectedRange()
     if let textRange = self.nsTextRange(from: nsr) {
-      var loc = textRange.location
+      // var loc = textRange.location
       
       textLayoutManager?.enumerateTextSegments(
         in: textRange,
