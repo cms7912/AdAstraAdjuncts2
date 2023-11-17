@@ -241,7 +241,7 @@ public extension UINSApplication {
 
 #if os(iOS)
 
-extension UITextInput {
+public extension UITextInput {
   var selectedRange: NSRange? {
     guard let range = selectedTextRange else { return nil }
     let location = offset(from: beginningOfDocument, to: range.start)
@@ -324,7 +324,7 @@ public extension UINSTextView {
   func uinsCurrentCursorRect() -> CGRect? {
 #if os(iOS)
     guard let range = self.selectedTextRange else { return nil }
-    let cursorRect = textView.caretRect(for: range.start)
+    let cursorRect = self.caretRect(for: range.start)
     return cursorRect
 #elseif os(macOS)
     
