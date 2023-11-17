@@ -330,20 +330,24 @@ public extension UINSTextView {
     
     var cursorRect: CGRect?
     
-    let nsr = self.selectedRange()
-    if let textRange = self.nsTextRange(from: nsr) {
+    let selectedNSRange = self.selectedRange()
+    if let textRange = self.nsTextRange(from: selectedNSRange ) {
       // var loc = textRange.location
       
       textLayoutManager?.enumerateTextSegments(
         in: textRange,
         type: .standard,
-        options: .upstreamAffinity) {
-          _,
-          segmentFrame,
-          baselinePosition,
-          _ in
+        options: []) {
+          _, segmentFrame, baselinePosition, textContainer in
           // use segmentFrame and baselinePosition to calculate insertion point location in NSTextContainer
-          cursorRect = segmentFrame
+          // cursorRect = segmentFrame
+          cursorRect = CGRect(
+            x: segmentFrame.origin.x -
+                textContainer.lineFragmentPadding, // not sure why this works or if it's even the correct reason it works 
+            y: segmentFrame.origin.y,
+            width: segmentFrame.width,
+            height: segmentFrame.size.height)
+          
           return false
         }
     }
