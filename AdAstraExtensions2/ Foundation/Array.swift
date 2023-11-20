@@ -28,6 +28,7 @@ public extension Array {
     return self[index]
   }
 
+  #if Disabled
   subscript(safeIndex index: Int?) -> Element? {
     guard let index = index else { return nil }
 
@@ -37,8 +38,21 @@ public extension Array {
     return self[index]
   }
   // https://www.hackingwithswift.com/example-code/language/how-to-make-array-access-safer-using-a-custom-subscript
+  #endif
 }
 
+public extension RandomAccessCollection {
+  subscript(safeIndex index: Self.Index?) -> Element? {
+    guard let index = index else { return nil }
+    
+    guard index >= startIndex, index < endIndex else {
+      return nil
+    }
+    return self[index]
+  }
+  // https://www.hackingwithswift.com/example-code/language/how-to-make-array-access-safer-using-a-custom-subscript
+
+}
 
 public extension Array where Element == Any? {
   subscript(safeIndex index: Int) -> Element? {
