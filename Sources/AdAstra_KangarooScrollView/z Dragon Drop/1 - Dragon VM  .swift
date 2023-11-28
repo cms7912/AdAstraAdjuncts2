@@ -13,23 +13,17 @@ import UniformTypeIdentifiers
 
 ///
 public class DragonViewModel<Card: DragonCard>: ObservableObject {
-	public init(sourceCardData: DragonViewModel<Card>.CardData? = nil,
-							sourceCardSourceParent: Card.Parent? = nil,
-							inProgressOverCardID: Card.ID? = nil,
-							dragonDelegate: DragonDelegate?) {
-		self.sourceCardData = sourceCardData
-		self.sourceCardSourceParent = sourceCardSourceParent
-		self.inProgressOverCardID = inProgressOverCardID
+	public init( dragonDelegate: DragonDelegate? = nil) {
 		self.dragonDelegate = dragonDelegate
 	}
 
 
 	let useDropLocationForLeftOrRightInsertion: Bool = true
-	@Published var sourceCardData: CardData?
-	var sourceCardSourceParent: Card.Parent?
+	@Published var sourceCardData: CardData? = nil
+	var sourceCardSourceParent: Card.Parent? = nil
 	// @Published var overCard: Card?
 	// @Published var inProgress: Bool = false
-	@Published var inProgressOverCardID: Card.ID? // = false
+	@Published var inProgressOverCardID: Card.ID? = nil
 
 	weak var dragonDelegate: DragonDelegate?
 }
@@ -113,20 +107,4 @@ public extension DragonViewModel {
 		 */
 	}
 }
-
-
-
-// extension View where Card == DragonCard {
-extension View {
-  // func dragonDrop<Card: DragonCard>(axis: Binding<Axis.Set>, _ card: Card) -> some View {
-	public func dragonDrop<Card: DragonCard>(_ cardData: DragonViewModel<Card>.CardData) -> some View {
-    // let cardDataView = cardDataViewClosure()
-    return self.modifier(
-			DragonCardView(
-				cardData: cardData))
-  }
-}
-
-
-
 

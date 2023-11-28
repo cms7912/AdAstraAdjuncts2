@@ -164,12 +164,12 @@ var destinationCardData: DragonViewModel<Card>.CardData // this is the card that
 
 		llog("🎉 succeeded")
 
-		self.resetDraggingModelAndDelegate()
+    // self.resetDraggingModelAndDelegate()
 		return true
 
 	}
   
-  func validateDrop (info: DropInfo) -> Bool {
+  func validateDrop(info: DropInfo) -> Bool {
     // if destinationCard?.hasCode ?? false {
     //   print("hasItemsConforming:  \(info.hasItemsConforming(to: [UTType.caleoCode, UTType.caleoSnippet] ) )")
     //   return info.hasItemsConforming(to: [UTType.caleoCode, UTType.caleoSnippet] )

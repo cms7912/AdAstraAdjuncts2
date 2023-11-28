@@ -111,3 +111,19 @@ struct DragonCardView<Card: DragonCard>: ViewModifier {
 
 
 
+
+
+// extension View where Card == DragonCard {
+extension View {
+  // func dragonDrop<Card: DragonCard>(axis: Binding<Axis.Set>, _ card: Card) -> some View {
+  public func dragonDrop<Card: DragonCard>(_ cardData: DragonViewModel<Card>.CardData) -> some View {
+    // let cardDataView = cardDataViewClosure()
+    return self.modifier(
+      DragonCardView(
+        cardData: cardData))
+  }
+}
+
+
+
+
