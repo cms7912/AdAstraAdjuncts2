@@ -10,9 +10,10 @@ import Foundation
 import CoreData
 import SwiftUI
 import UniformTypeIdentifiers
+import AdAstraExtensions
 
 ///
-public class DragonViewModel<Card: DragonCard>: ObservableObject {
+open class DragonViewModel<Card: DragonCard>: ObservableObject {
 	public init( dragonDelegate: DragonDelegate? = nil) {
 		self.dragonDelegate = dragonDelegate
 	}
@@ -25,7 +26,7 @@ public class DragonViewModel<Card: DragonCard>: ObservableObject {
 	// @Published var inProgress: Bool = false
 	@Published var inProgressOverCardID: Card.ID? = nil
 
-	weak var dragonDelegate: DragonDelegate?
+	open weak var dragonDelegate: DragonDelegate?
 }
 
 public protocol DragonDelegate: AnyObject {

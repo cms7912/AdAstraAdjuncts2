@@ -115,3 +115,8 @@ public extension EmptyView {
   }
 }
 
+extension Task where Success == Never, Failure == Never {
+  public static func sleep(seconds: UInt64) async throws {
+    try await Task.sleep(nanoseconds: seconds * 1_000_000_000)
+  }
+}
