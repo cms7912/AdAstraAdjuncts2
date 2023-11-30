@@ -121,6 +121,11 @@ public extension Data{
   }
 }
 
+public extension Data{
+  var asString: String? {
+    String(data: self, encoding: String.Encoding.utf8)
+  }
+}
 public extension String {
   var asData: Data? {
     data(using: String.Encoding.utf8, allowLossyConversion: false)
