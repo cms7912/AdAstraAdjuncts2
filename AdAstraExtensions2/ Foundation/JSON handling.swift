@@ -87,9 +87,14 @@ public extension JSONCodable {
   }
 }
 
-public extension Encodable {
+public extension Encodable where Self: Decodable, Self: Equatable {
   var asJSON: JSONData { get throws {
-    try JSONData(self)
+    #if DEBUG
+    let jsonData = try JSONData(self)
+    let result = try jsonData.jsonTo(Self.self)
+    assert(self == result)
+    #endif
+    return try JSONData(self)
   } }
 }
 

@@ -158,7 +158,7 @@ public enum QuantumValue: JSONCodable, Equatable, Hashable {
     case missingValue
   }
   
-  private struct MissingValueStuct: Codable { }
+  private struct MissingValueStuct: Codable, Equatablele { }
   public static var MissingValue: QuantumValue {
     try! MissingValueStuct().asJSON.asQuantumValue
   }
