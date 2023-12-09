@@ -110,3 +110,12 @@ extension UUID: Quantumable {
   }
 }
 
+
+extension Locale: Quantumable {
+  public var asQuantumValue: QuantumValue { return self.identifier.asQuantumValue }
+  
+  public init(_ qv: QuantumValue) throws {
+    self = try Locale(identifier: qv.asString)
+  }
+
+}

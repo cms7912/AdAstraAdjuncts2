@@ -209,3 +209,16 @@ public extension Optional where Wrapped == Double {
     return lhs / rhs
   }
 }
+
+
+public extension AdditiveArithmetic {
+  var asBool: Bool {
+      return self != .zero
+  }
+}
+
+public extension Bool {
+  var asInteger: Int {
+    self ? 1 : 0
+  }
+}

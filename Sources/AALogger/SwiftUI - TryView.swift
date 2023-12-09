@@ -43,6 +43,7 @@ extension AAErrorMessage: TryViewOnError {
 
 }
 
+#if Disabled2023Dec08
 // extension String: TryViewOnError {
 extension String: TryViewOnError {
   // public var message: String { self }
@@ -54,6 +55,8 @@ extension String: TryViewOnError {
     errorMessage
   }
 }
+#endif
+
 
 // extension View: TryViewOnError { }
 

@@ -168,12 +168,18 @@ public extension Optional {
     optionalObject*!*
   }
 
-  static postfix func ~! (optionalObject: Wrapped?) -> Wrapped {
-    optionalObject*!*
+  static postfix func ~! (optionalObject: Wrapped?) -> Wrapped? {
+    // optionalObject*!*
+    if let unwrapped = optionalObject { return unwrapped }
+    assertionFailure()
+    return nil
   }
 
-  static postfix func *! (optionalObject: Wrapped?) -> Wrapped {
-    optionalObject*!*
+  static postfix func *! (optionalObject: Wrapped?) -> Wrapped? {
+    // optionalObject*!*
+    if let unwrapped = optionalObject { return unwrapped }
+    assertionFailure()
+    return nil
   }
 }
 
