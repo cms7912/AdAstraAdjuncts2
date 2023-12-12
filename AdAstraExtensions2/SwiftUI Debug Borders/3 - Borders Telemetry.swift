@@ -201,7 +201,7 @@ public extension View {
       if DebugBordersViewModel.DebugBordersOn {
         self
           .modifier(DebugBordersAndTelemetry())
-          .addAliveTimer()
+          // .addAliveTimer()
       } else {
         self
       }
