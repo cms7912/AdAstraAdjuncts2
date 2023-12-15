@@ -298,7 +298,7 @@ public extension CoreData.NSManagedObjectContext {
       [weak self] in
       guard let self = self else { return }
       // [self] in
-      let startTime: DispatchTime = .now()
+      // let startTime: DispatchTime = .now()
       autoreleasepool{
         WorkBlock(self)
       }
