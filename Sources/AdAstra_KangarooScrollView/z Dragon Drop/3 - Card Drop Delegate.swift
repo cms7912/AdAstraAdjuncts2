@@ -60,7 +60,7 @@ struct CardDropDelegate<Card: DragonCard>: DropDelegate {
     self.dragonVM = dragonVM
     self.destinationCardData = destinationCardData
     self.destinationCardSize = destinationCardSize
-    // Logger.llog("🐲 CardDropDelegate init")
+    Logger.llog("🐲 CardDropDelegate init")
   }
   func llog(_ string: String? = nil, function: String = #function) {
     Logger.llog("🐲 \(string ?? "")", function: function)

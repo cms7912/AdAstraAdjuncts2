@@ -348,11 +348,11 @@ struct Box: View {
       // }
     }
     // .dragonDrop(
-    // 	DragonViewModel.CardData(axis: .constant(.horizontal),
-    // 													 selfCard: boxCard,
-    // 													 selfContentUTTType: UTType.text ,
-    // 													 droppableContentUTTypes: [UTType.text],
-    // 													 backgroundColor: Color.white)
+    //   DragonViewModel.CardData(axis: .constant(.vertical),
+    //                            selfCard: boxCard,
+    //                            selfContentUTTType: UTType.text ,
+    //                            droppableContentUTTypes: [UTType.text],
+    //                            backgroundColor: Color.white)
     // )
   }
 }

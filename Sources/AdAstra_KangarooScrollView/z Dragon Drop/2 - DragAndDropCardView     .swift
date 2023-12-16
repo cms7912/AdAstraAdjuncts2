@@ -78,16 +78,17 @@ struct DragonCardView<Card: DragonCard>: ViewModifier {
     // #endif
 
 
-		// onDrop is possible to selfCard:
-			.onDrop(of: cardData.droppableContentUTTypes,
-							delegate:
-								CardDropDelegate<Card>(
-									dragonVM: dragonVM,
-									destinationCardData: cardData,
-									destinationCardSize: mySize
-								))
+    // onDrop is possible to selfCard:
+      .onDrop(of: cardData.droppableContentUTTypes,
+              delegate:
+                CardDropDelegate<Card>(
+                  dragonVM: dragonVM,
+                  destinationCardData: cardData,
+                  destinationCardSize: mySize
+                ))
 
-		
+
+    
     // onDrag this selfCard
       .onDrag {
         Logger.llog("🐲 .onDrag")
@@ -98,8 +99,10 @@ struct DragonCardView<Card: DragonCard>: ViewModifier {
 				// tell host app the drag starting
 				dragonVM.sourceCardData?.sourceCardDragStarted()
 
-				return NSItemProvider(item: selfCard.objectIDEncoded,
+				var nsip = NSItemProvider(item: selfCard.objectIDEncoded,
 															typeIdentifier: cardData.selfContentUTTType?.identifier)
+        
+        return nsip
       }
 
 
